@@ -1,12 +1,14 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import HomePage from '../../pages/HomePage'
 import LoginPage from '../../pages/LoginPage'
 import SignUpPage from '../../pages/SignUpPage'
 
 const MotionDiv = motion.div
 const ROUTE_ORDER = {
-  '/login': 0,
-  '/signup': 1,
+  '/home': 0,
+  '/login': 1,
+  '/signup': 2,
 }
 
 function AppRouter() {
@@ -38,10 +40,11 @@ function AnimatedRoutes() {
         exit="exit"
       >
         <Routes location={location}>
-          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </MotionDiv>
     </AnimatePresence>
@@ -49,10 +52,10 @@ function AnimatedRoutes() {
 }
 
 function getRouteDirection(pathname) {
-  const currentOrder = ROUTE_ORDER[pathname]
-  const loginOrder = ROUTE_ORDER['/login']
-  if (typeof currentOrder !== 'number') return 0
-  return currentOrder > loginOrder ? 1 : -1
+  const order = ROUTE_ORDER[pathname]
+  const homeOrder = ROUTE_ORDER['/home']
+  if (typeof order !== 'number') return 0
+  return order > homeOrder ? 1 : -1
 }
 
 const pageVariants = {

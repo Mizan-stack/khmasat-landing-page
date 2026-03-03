@@ -37,12 +37,13 @@ function LoginFormCard() {
       className="relative flex h-full flex-col rounded-[30px] border border-[var(--border-strong)] [background:var(--right-panel-bg)] px-6 py-5 shadow-[0_24px_80px_rgba(8,15,45,0.2)] backdrop-blur-xl md:px-8 md:py-6"
     >
       <div className="mb-10 flex items-center justify-between gap-3">
-        <button
-          type="button"
+        <Link
+          to="/home"
+          state={{ direction: -1 }}
           className="h-12 rounded-full border border-[var(--border-soft)] bg-[var(--surface-soft)] px-6 text-sm font-extrabold text-[var(--right-text-primary)] transition-colors duration-300 hover:border-[var(--accent)]"
         >
           العودة للموقع
-        </button>
+        </Link>
         <ThemeToggle />
       </div>
 
