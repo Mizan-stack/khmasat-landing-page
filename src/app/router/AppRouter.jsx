@@ -6,6 +6,7 @@ import SignUpPage from '../../pages/SignUpPage'
 
 const MotionDiv = motion.div
 const ROUTE_ORDER = {
+  '/': 0,
   '/home': 0,
   '/login': 1,
   '/signup': 2,
@@ -40,11 +41,11 @@ function AnimatedRoutes() {
         exit="exit"
       >
         <Routes location={location}>
-          <Route path="/" element={<Navigate to="/home" replace />} />
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="*" element={<Navigate to="/home" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </MotionDiv>
     </AnimatePresence>
@@ -53,7 +54,7 @@ function AnimatedRoutes() {
 
 function getRouteDirection(pathname) {
   const order = ROUTE_ORDER[pathname]
-  const homeOrder = ROUTE_ORDER['/home']
+  const homeOrder = ROUTE_ORDER['/']
   if (typeof order !== 'number') return 0
   return order > homeOrder ? 1 : -1
 }

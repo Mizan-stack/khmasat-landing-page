@@ -1,17 +1,37 @@
-import HomeFeaturesSection from '../components/home/HomeFeaturesSection'
-import HomeHeroSection from '../components/home/HomeHeroSection'
-import HomeNavbar from '../components/home/HomeNavbar'
-import HomeStoryTabsSection from '../components/home/HomeStoryTabsSection'
-import HomeTopBar from '../components/home/HomeTopBar'
+import {
+  HomeCapabilitiesSection,
+  HomeClientControlSection,
+  HomeCommerceNeedsSection,
+  HomeFeaturesSection,
+  HomeFloatingContact,
+  HomeHeroSection,
+  HomeHowToRegisterSection,
+  HomeImpactStatsSection,
+  HomeNavbar,
+  HomePlatformFeaturesSection,
+  HomePricingPlansSection,
+  HomeRegisterNowSection,
+  HomeStoryTabsSection,
+  HomeTopBar,
+} from '../components/home'
 
 function HomePage() {
   return (
     <main id="home" className="min-h-screen [background:var(--home-page-bg)]">
       <HomeTopBar />
       <HomeNavbar />
+      <HomeFloatingContact />
       <HomeHeroSection />
       <HomeStoryTabsSection />
       <HomeFeaturesSection />
+      <HomeCapabilitiesSection />
+      <HomePlatformFeaturesSection />
+      <HomeCommerceNeedsSection />
+      <HomePricingPlansSection />
+      <HomeHowToRegisterSection />
+      <HomeClientControlSection />
+      <HomeImpactStatsSection />
+      <HomeRegisterNowSection />
     </main>
   )
 }

@@ -1,6 +1,4 @@
-import AuthPageLayout from '../components/auth/AuthPageLayout'
-import MarketingPanel from '../components/auth/MarketingPanel'
-import SignUpFormCard from '../components/auth/SignUpFormCard'
+import { AuthPageLayout, MarketingPanel, SignUpFormCard } from '../components/auth'
 
 function SignUpPage() {
   return (

@@ -1,0 +1,23 @@
+export const SIGNUP_FORM_TEXT = {
+  backToLogin: 'العودة لتسجيل الدخول',
+  headingTop: 'أنشئ حسابك',
+  headingBottom: 'الإعلاني الآن',
+  intro:
+    'افتح حسابك كمعلن في خطوات بسيطة، وابدأ الوصول لعملاء أكثر من خلال حملات موجهة باللغة العربية.',
+  nameLabel: 'الاسم الكامل',
+  namePlaceholder: 'مثال: أحمد محمد',
+  emailLabel: 'البريد الإلكتروني',
+  emailPlaceholder: 'owner@adsplatform.com',
+  phoneLabel: 'رقم الهاتف',
+  phoneFallbackPlaceholder: 'اكتب رقم الهاتف',
+  passwordLabel: 'كلمة المرور',
+  requestOtp: 'احصل على OTP',
+  submit: 'تسجيل الحساب',
+  otpSent: 'تم إرسال رمز OTP بنجاح. افتح الشاشة وأدخل الكود ثم اضغط Verify.',
+  otpVerified: 'تم التحقق من OTP بنجاح.',
+  signupSuccess: 'تم تسجيل الحساب بنجاح (واجهة UI فقط).',
+  fieldsWarning: 'أكمل الحقول بشكل صحيح قبل المتابعة.',
+  otpWarning: 'اطلب OTP ثم أدخل الكود واضغط Verify قبل تسجيل الحساب.',
+  hasAccount: 'لديك حساب بالفعل؟',
+  loginNow: 'سجّل الدخول',
+}

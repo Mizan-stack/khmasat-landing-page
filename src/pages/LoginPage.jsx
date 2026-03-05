@@ -1,6 +1,4 @@
-import AuthPageLayout from '../components/auth/AuthPageLayout'
-import LoginFormCard from '../components/auth/LoginFormCard'
-import MarketingPanel from '../components/auth/MarketingPanel'
+import { AuthPageLayout, LoginFormCard, MarketingPanel } from '../components/auth'
 
 function LoginPage() {
   return <AuthPageLayout marketing={<MarketingPanel variant="login" from="left" />} form={<LoginFormCard />} />
