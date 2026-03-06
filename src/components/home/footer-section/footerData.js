@@ -4,9 +4,9 @@ import { FaGlobe, FaXTwitter } from 'react-icons/fa6'
 const FOOTER_LINKS = [
   { label: 'الرئيسية', href: '#home' },
   { label: 'من نحن', href: '#about' },
-  { label: 'لماذا نحن', href: '#features' },
-  { label: 'الحلول', href: '#works' },
-  { label: 'أعمالنا', href: '#pricing' },
+  { label: 'لماذا نحن', href: '#why-us' },
+  { label: 'الحلول', href: '#solutions' },
+  { label: 'أعمالنا', href: '#works' },
   { label: 'اتصل بنا', href: '#register-now' },
 ]
 

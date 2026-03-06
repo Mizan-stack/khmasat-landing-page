@@ -4,7 +4,7 @@
   { label: 'لماذا نحن', href: '#why-us' },
   { label: 'الحلول', href: '#solutions' },
   { label: 'أعمالنا', href: '#works' },
-  { label: 'تواصل معنا', href: '#contact' },
+  { label: 'تواصل معنا', href: '#register-now' },
 ]
 
 export { NAV_LINKS }
