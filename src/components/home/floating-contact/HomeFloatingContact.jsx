@@ -10,6 +10,8 @@ const MotionButton = motion.button
 
 function HomeFloatingContact() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isFooterVisible, setIsFooterVisible] = useState(false)
+  const [isMobile, setIsMobile] = useState(() => (typeof window !== 'undefined' ? window.innerWidth < 768 : false))
 
   useEffect(() => {
     if (!isOpen) return undefined
@@ -22,15 +24,45 @@ function HomeFloatingContact() {
     }
   }, [isOpen])
 
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  useEffect(() => {
+    const footer = document.getElementById('footer')
+    if (!footer) return undefined
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsFooterVisible(entry.isIntersecting)
+      },
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px 190px 0px',
+      },
+    )
+
+    observer.observe(footer)
+    return () => observer.disconnect()
+  }, [])
+
+  const liftOffset = isFooterVisible ? (isMobile ? -195 : -150) : 0
+
   return (
     <>
       <MotionDiv
         initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+        animate={{ opacity: 1, x: 0, y: liftOffset }}
+        transition={{
+          opacity: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.3 },
+          x: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.3 },
+          y: { type: 'spring', stiffness: 240, damping: 28 },
+        }}
         className="pointer-events-none sticky top-[calc(100dvh-8.5rem)] z-30 h-0 md:top-[calc(100dvh-9rem)]"
       >
-        <div className="pointer-events-auto ml-auto flex w-max flex-col items-end gap-2 px-3 md:gap-3 md:px-6">
+        <div className="pointer-events-auto ml-auto flex w-max flex-col items-end gap-2 pr-1 md:gap-3 md:pr-2">
           <motion.a
             href={WHATSAPP_LINK}
             target="_blank"
@@ -62,12 +94,12 @@ function HomeFloatingContact() {
             whileTap={{ scale: 0.96 }}
             animate={{ y: [0, -3, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="group relative inline-flex h-14 items-center gap-2 overflow-hidden rounded-2xl border border-[var(--home-contact-btn-border)] bg-[var(--home-contact-btn-bg)] px-5 text-lg font-black text-[var(--home-contact-btn-text)] shadow-[0_18px_36px_rgba(18,42,76,0.26)]"
+            className="group relative inline-flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl border border-[var(--home-contact-btn-border)] bg-[var(--home-contact-btn-bg)] text-xl font-black text-[var(--home-contact-btn-text)] shadow-[0_18px_36px_rgba(18,42,76,0.26)]"
+            aria-label="اتصل بنا"
           >
-            <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/20 text-xl">
+            <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/20">
               <FaHeadset />
             </span>
-            <span className="relative">اتصل بنا</span>
           </MotionButton>
         </div>
       </MotionDiv>

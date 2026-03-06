@@ -2,7 +2,9 @@ import {
   HomeCapabilitiesSection,
   HomeClientControlSection,
   HomeCommerceNeedsSection,
+  HomeFaqSection,
   HomeFeaturesSection,
+  HomeFooterSection,
   HomeFloatingContact,
   HomeHeroSection,
   HomeHowToRegisterSection,
@@ -32,6 +34,8 @@ function HomePage() {
       <HomeClientControlSection />
       <HomeImpactStatsSection />
       <HomeRegisterNowSection />
+      <HomeFaqSection />
+      <HomeFooterSection />
     </main>
   )
 }
