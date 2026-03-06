@@ -2,16 +2,16 @@ import { FaFacebookF, FaGithub, FaLinkedinIn, FaTelegramPlane } from 'react-icon
 import { FaGlobe, FaXTwitter } from 'react-icons/fa6'
 
 const FOOTER_LINKS = [
-  { label: 'الرئيسية', href: '#home' },
-  { label: 'من نحن', href: '#about' },
-  { label: 'لماذا نحن', href: '#why-us' },
-  { label: 'الحلول', href: '#solutions' },
-  { label: 'أعمالنا', href: '#works' },
-  { label: 'اتصل بنا', href: '#register-now' },
+  { label: 'الرئيسية', href: '/#home' },
+  { label: 'من نحن', href: '/#about' },
+  { label: 'لماذا نحن', href: '/#why-us' },
+  { label: 'الحلول', href: '/#solutions' },
+  { label: 'أعمالنا', href: '/#works' },
+  { label: 'اتصل بنا', href: '/#register-now' },
 ]
 
 const FOOTER_SOCIALS = [
-  { label: 'الموقع', href: '#home', icon: FaGlobe },
+  { label: 'الموقع', href: '/#home', icon: FaGlobe },
   { label: 'إكس', href: 'https://x.com', icon: FaXTwitter },
   { label: 'جيت هاب', href: 'https://github.com', icon: FaGithub },
   { label: 'فيسبوك', href: 'https://facebook.com', icon: FaFacebookF },
@@ -31,3 +31,4 @@ const FOOTER_CONTENT = {
 }
 
 export { FOOTER_CONTENT, FOOTER_LINKS, FOOTER_SOCIALS }
+
