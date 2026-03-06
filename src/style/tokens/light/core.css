@@ -1,0 +1,43 @@
+:root {
+  color-scheme: light;
+  --page-bg: radial-gradient(circle at 20% 20%, #d7eeff 0%, #e9effc 35%, #f5ecff 100%);
+  --bg-orb-1: #66f2ff;
+  --bg-orb-2: #7488ff;
+  --bg-orb-3: #ffa2d2;
+
+  --right-panel-bg: linear-gradient(145deg, rgba(253, 254, 255, 0.92), rgba(245, 247, 255, 0.72));
+  --left-panel-bg: linear-gradient(160deg, #1f33bf 0%, #2b46d8 45%, #198fdd 100%);
+  --surface-panel: rgba(255, 255, 255, 0.45);
+  --surface-soft: rgba(255, 255, 255, 0.64);
+  --surface-hover: rgba(255, 255, 255, 0.75);
+  --border-soft: rgba(133, 155, 212, 0.35);
+  --border-strong: rgba(133, 155, 212, 0.5);
+
+  --text-primary: #0d1738;
+  --text-muted: #5c6886;
+  --text-placeholder: #8d9ab4;
+  --right-text-primary: #0a122b;
+  --right-text-muted: #4f5e80;
+  --right-hero-bg: linear-gradient(135deg, #dce7ff 0%, #ffefe2 100%);
+  --right-hero-border: #c0d3ff;
+
+  --left-title-main: #f8fbff;
+  --left-title-soft: #e2ebff;
+  --left-paragraph: #f1f5ff;
+  --left-pill-bg: rgba(16, 44, 122, 0.34);
+  --left-pill-border: rgba(224, 236, 255, 0.6);
+  --left-pill-text: #f8fbff;
+
+  --status-info-bg: #d8f4ff;
+  --status-info-border: #7bcce8;
+  --status-info-text: #0d5872;
+  --status-success-bg: #dff8ec;
+  --status-success-border: #75cfa5;
+  --status-success-text: #155c42;
+
+  --accent: #ff7f38;
+  --accent-2: #ffd742;
+  --accent-3: #ff64d4;
+  --accent-soft: rgba(255, 127, 56, 0.15);
+  --orb-color: rgba(122, 172, 255, 0.26);
+}

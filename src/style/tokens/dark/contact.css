@@ -1,0 +1,18 @@
+:root[data-theme='dark'] {
+  --home-contact-btn-bg: #3d78eb;
+  --home-contact-btn-border: #5a93ff;
+  --home-contact-btn-text: #ebf8ff;
+  --home-contact-modal-bg: linear-gradient(155deg, #102748 0%, #112c50 100%);
+  --home-contact-border: rgba(92, 127, 181, 0.52);
+  --home-contact-title: #58d3d0;
+  --home-contact-label: #d8e9ff;
+  --home-contact-input-bg: rgba(18, 41, 74, 0.78);
+  --home-contact-input-border: rgba(90, 126, 185, 0.62);
+  --home-contact-input-text: #ecf5ff;
+  --home-contact-placeholder: #8faed5;
+  --home-contact-focus: #58d3d0;
+  --home-contact-close-bg: rgba(20, 43, 76, 0.84);
+  --home-contact-close-border: rgba(90, 127, 181, 0.62);
+  --home-contact-close-text: #b9d4f5;
+  --home-contact-button-bg: linear-gradient(135deg, #31c8bf 0%, #4ba4ec 100%);
+}

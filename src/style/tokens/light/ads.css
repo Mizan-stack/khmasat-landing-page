@@ -1,0 +1,24 @@
+:root {
+  --ads-page-bg: linear-gradient(180deg, #f5f7fb 0%, #edf2f8 100%);
+  --ads-surface: rgba(255, 255, 255, 0.92);
+  --ads-surface-soft: rgba(246, 249, 255, 0.9);
+  --ads-border: rgba(182, 198, 223, 0.56);
+  --ads-border-soft: rgba(170, 190, 218, 0.5);
+  --ads-text: #102345;
+  --ads-muted: #637a9d;
+  --ads-toggle-text: #6f84a6;
+  --ads-toggle-active-bg: rgba(51, 182, 175, 0.14);
+  --ads-toggle-active-text: #2ea9a4;
+  --ads-dropdown-bg: #ffffff;
+  --ads-dropdown-border: rgba(168, 189, 221, 0.6);
+  --ads-dropdown-active-bg: #2f66e6;
+  --ads-dropdown-active-text: #eff5ff;
+  --ads-dropdown-hover-bg: rgba(47, 102, 230, 0.08);
+  --ads-create-bg: linear-gradient(135deg, #35bdb8 0%, #45afc8 100%);
+  --ads-create-text: #efffff;
+  --ads-button-primary-bg: linear-gradient(135deg, #35beb8 0%, #44b4c8 100%);
+  --ads-button-primary-text: #efffff;
+  --ads-button-ghost-bg: rgba(53, 190, 184, 0.08);
+  --ads-button-ghost-border: rgba(53, 190, 184, 0.55);
+  --ads-button-ghost-text: #2da9a3;
+}

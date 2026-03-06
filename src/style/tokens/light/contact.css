@@ -1,0 +1,18 @@
+:root {
+  --home-contact-btn-bg: #21b4ad;
+  --home-contact-btn-border: #1f9f99;
+  --home-contact-btn-text: #f3ffff;
+  --home-contact-modal-bg: linear-gradient(155deg, #f8fbff 0%, #eef4fb 100%);
+  --home-contact-border: rgba(167, 191, 221, 0.56);
+  --home-contact-title: #2bb5b2;
+  --home-contact-label: #223a5f;
+  --home-contact-input-bg: rgba(255, 255, 255, 0.82);
+  --home-contact-input-border: rgba(179, 198, 222, 0.7);
+  --home-contact-input-text: #173154;
+  --home-contact-placeholder: #8ea4c4;
+  --home-contact-focus: #44bfc0;
+  --home-contact-close-bg: rgba(255, 255, 255, 0.88);
+  --home-contact-close-border: rgba(176, 195, 223, 0.72);
+  --home-contact-close-text: #6d7f98;
+  --home-contact-button-bg: linear-gradient(135deg, #36beb8 0%, #43adc4 100%);
+}
