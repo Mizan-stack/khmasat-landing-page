@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useLoginForm } from '../../../hooks/useLoginForm'
 import { AuthFormField, PasswordInputField, PhoneFieldRow, inputClass } from '../shared'
 import LoginCardHeader from './LoginCardHeader'
@@ -12,6 +13,7 @@ const MotionForm = motion.form
 
 function LoginFormCard() {
   const [showPassword, setShowPassword] = useState(false)
+  const navigate = useNavigate()
   const {
     form,
     fieldErrors,
@@ -25,6 +27,13 @@ function LoginFormCard() {
     handleSubmit,
     resetSuccess,
   } = useLoginForm()
+
+  function onSubmit(event) {
+    const isValid = handleSubmit(event)
+    if (isValid) {
+      navigate('/ads-board', { state: { direction: 1 } })
+    }
+  }
 
   const phoneError = touched.phone ? fieldErrors.phone : ''
   const emailError = touched.email ? fieldErrors.email : ''
@@ -48,7 +57,7 @@ function LoginFormCard() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.28 }}
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
         noValidate
         className="mt-5 space-y-4 rounded-3xl border border-[var(--border-soft)] bg-[var(--surface-panel)] p-4 md:p-5"
       >

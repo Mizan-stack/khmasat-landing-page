@@ -53,10 +53,11 @@ export function useLoginForm() {
 
     if (hasErrors) {
       setSubmitted(false)
-      return
+      return false
     }
 
     setSubmitted(true)
+    return true
   }
 
   function resetSuccess() {

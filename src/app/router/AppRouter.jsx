@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-route
 import HomePage from '../../pages/HomePage'
 import LoginPage from '../../pages/LoginPage'
 import SignUpPage from '../../pages/SignUpPage'
+import AdsBoardPage from '../../pages/AdsBoardPage'
 
 const MotionDiv = motion.div
 const ROUTE_ORDER = {
@@ -10,6 +11,7 @@ const ROUTE_ORDER = {
   '/home': 0,
   '/login': 1,
   '/signup': 2,
+  '/ads-board': 3,
 }
 
 function AppRouter() {
@@ -45,6 +47,7 @@ function AnimatedRoutes() {
           <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/ads-board" element={<AdsBoardPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </MotionDiv>
