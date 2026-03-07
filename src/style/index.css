@@ -1,6 +1,3 @@
-@import './foundation/fonts.css';
-@import './foundation/tailwind.css';
-
 @import './tokens/light/core.css';
 @import './tokens/light/home-layout.css';
 @import './tokens/light/home-sections.css';
