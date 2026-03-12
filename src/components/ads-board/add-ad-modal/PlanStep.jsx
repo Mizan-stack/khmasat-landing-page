@@ -70,7 +70,7 @@ function PlanStep({ planCycle, planOptions, selectedPlanKey, onCycleChange, onSe
           whileTap={{ scale: 0.97 }}
           onClick={onContinue}
           disabled={!selectedPlanKey}
-          className="inline-flex h-12 min-w-36 items-center justify-center rounded-2xl bg-[var(--ads-create-bg)] px-7 text-base font-black text-[var(--ads-text)] dark:text-[var(--ads-create-text)] disabled:cursor-not-allowed disabled:opacity-55"
+          className="inline-flex h-12 min-w-36 items-center justify-center rounded-2xl px-7 text-base font-black text-[var(--ads-create-text)] [background:var(--ads-create-bg)] disabled:cursor-not-allowed disabled:opacity-55"
         >
           التالي
         </MotionButton>

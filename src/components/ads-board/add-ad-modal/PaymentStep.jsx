@@ -131,7 +131,7 @@ function PaymentStep({ plan, form, errors, touched, isPaying, onFieldChange, onF
           whileTap={{ scale: 0.97 }}
           onClick={onPay}
           disabled={isPaying}
-          className="inline-flex h-12 min-w-40 items-center justify-center rounded-2xl bg-[var(--ads-create-bg)] px-7 text-base font-black text-white shadow-[0_14px_26px_rgba(32,179,170,0.3)] disabled:cursor-not-allowed disabled:opacity-70"
+          className="inline-flex h-12 min-w-40 items-center justify-center rounded-2xl px-7 text-base font-black text-[var(--ads-create-text)] shadow-[0_14px_26px_rgba(32,179,170,0.3)] [background:var(--ads-create-bg)] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {isPaying ? 'جارٍ تنفيذ الدفع...' : 'ادفع الآن'}
         </MotionButton>

@@ -142,7 +142,7 @@ function AddAdModal({ isOpen, onClose }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="pointer-events-none fixed inset-0 z-[2000] isolate flex items-center justify-center p-3 md:p-6"
+          className="pointer-events-none fixed inset-0 z-[2000] isolate flex items-start justify-center overflow-y-auto p-3 md:items-center md:p-6"
         >
           <button
             type="button"
@@ -157,7 +157,7 @@ function AddAdModal({ isOpen, onClose }) {
             exit={{ opacity: 0, y: 24, scale: 0.95 }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             onClick={(event) => event.stopPropagation()}
-            className="pointer-events-auto relative z-10 w-full max-w-5xl overflow-hidden rounded-[30px] border bg-[var(--ads-surface)] p-4 shadow-[0_30px_70px_rgba(4,13,31,0.42)] md:max-h-[92dvh] md:p-6"
+            className="pointer-events-auto relative z-10 flex w-full max-w-5xl flex-col overflow-hidden rounded-[30px] border bg-[var(--ads-surface)] p-4 shadow-[0_30px_70px_rgba(4,13,31,0.42)] max-h-[94dvh] md:max-h-[92dvh] md:p-6"
             style={modalPanelStyle}
             dir="rtl"
           >
@@ -198,13 +198,7 @@ function AddAdModal({ isOpen, onClose }) {
               })}
             </div>
 
-            <div
-              className={
-                step === 2
-                  ? 'max-h-[calc(100dvh-15rem)] overflow-y-auto overflow-x-hidden pe-1 md:max-h-[calc(92dvh-220px)]'
-                  : 'overflow-visible'
-              }
-            >
+            <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden pe-1">
               <AnimatePresence mode="wait" custom={direction}>
                 <MotionDiv
                   key={step}

@@ -268,7 +268,7 @@ function BusinessInfoStep({
           whileHover={{ y: -2, scale: 1.01 }}
           whileTap={{ scale: 0.97 }}
           onClick={onContinue}
-          className="inline-flex h-12 min-w-36 items-center justify-center rounded-2xl bg-[var(--ads-create-bg)] px-7 text-base font-black text-[var(--ads-text)] dark:text-[var(--ads-create-text)]"
+          className="inline-flex h-12 min-w-36 items-center justify-center rounded-2xl px-7 text-base font-black text-[var(--ads-create-text)] [background:var(--ads-create-bg)]"
         >
           التالي
         </MotionButton>
