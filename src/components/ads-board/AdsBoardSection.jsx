@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useMemo, useState } from 'react'
 import { FaPlus } from 'react-icons/fa6'
+import { AddAdModal } from './add-ad-modal'
 import AdsAdCard from './AdsAdCard'
 import AdsBoardToolbar from './AdsBoardToolbar'
 import { ADS_ITEMS, ADS_PAGE_TEXT } from './adsBoardData'
@@ -22,6 +23,7 @@ function sortItems(items, sortBy) {
 function AdsBoardSection() {
   const [sortBy, setSortBy] = useState('latest')
   const [viewMode, setViewMode] = useState('grid')
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false)
 
   const ads = useMemo(() => sortItems(ADS_ITEMS, sortBy), [sortBy])
 
@@ -44,6 +46,7 @@ function AdsBoardSection() {
           type="button"
           whileHover={{ y: -3, scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
+          onClick={() => setIsAddModalOpen(true)}
           className="inline-flex h-12 items-center gap-2 rounded-2xl px-5 text-[clamp(1rem,1.2vw,1.1rem)] font-black text-[var(--ads-create-text)] shadow-[0_14px_26px_rgba(32,179,170,0.34)] [background:var(--ads-create-bg)]"
         >
           <FaPlus />
@@ -73,6 +76,8 @@ function AdsBoardSection() {
           ))}
         </MotionDiv>
       </AnimatePresence>
+
+      <AddAdModal isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
     </MotionSection>
   )
 }

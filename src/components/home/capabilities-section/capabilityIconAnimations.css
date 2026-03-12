@@ -1,0 +1,518 @@
+.cap-shine {
+  animation: cap-shine 1.6s linear infinite;
+  animation-delay: var(--cap-shine-delay, 0s);
+}
+
+.cap-icon-wrapper,
+.cap-icon-inner,
+.cap-icon-halo {
+  transform-origin: 50% 50%;
+  animation-delay: var(--cap-delay, 0s);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  will-change: transform, opacity;
+}
+
+.cap-icon-halo {
+  animation-name: cap-halo-pulse;
+  animation-duration: 1.45s;
+}
+
+.cap-motion-boxes .cap-icon-wrapper {
+  animation-name: cap-boxes-wrapper;
+  animation-duration: 2.2s;
+}
+
+.cap-motion-boxes .cap-icon-inner {
+  animation-name: cap-boxes-icon;
+  animation-duration: 1.4s;
+}
+
+.cap-motion-boxes .cap-icon-halo {
+  animation-duration: 1.8s;
+}
+
+.cap-motion-chart .cap-icon-wrapper {
+  animation-name: cap-chart-wrapper;
+  animation-duration: 1.45s;
+}
+
+.cap-motion-chart .cap-icon-inner {
+  animation-name: cap-chart-icon;
+  animation-duration: 1.2s;
+}
+
+.cap-motion-chart .cap-icon-halo {
+  animation-duration: 1.5s;
+}
+
+.cap-motion-shipping .cap-icon-wrapper {
+  animation-name: cap-shipping-wrapper;
+  animation-duration: 1s;
+}
+
+.cap-motion-shipping .cap-icon-inner {
+  animation-name: cap-shipping-icon;
+  animation-duration: 1s;
+}
+
+.cap-motion-shipping .cap-icon-halo {
+  animation-duration: 1.2s;
+}
+
+.cap-motion-payment .cap-icon-wrapper {
+  animation-name: cap-payment-wrapper;
+  animation-duration: 1.6s;
+}
+
+.cap-motion-payment .cap-icon-inner {
+  animation-name: cap-payment-icon;
+  animation-duration: 1.2s;
+}
+
+.cap-motion-payment .cap-icon-halo {
+  animation-duration: 1.6s;
+}
+
+.cap-motion-globe .cap-icon-wrapper {
+  animation-name: cap-globe-wrapper;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+}
+
+.cap-motion-globe .cap-icon-inner {
+  animation-name: cap-globe-icon;
+  animation-duration: 1.5s;
+}
+
+.cap-motion-globe .cap-icon-halo {
+  animation-duration: 1.8s;
+}
+
+.cap-motion-paint .cap-icon-wrapper {
+  animation-name: cap-paint-wrapper;
+  animation-duration: 1.5s;
+}
+
+.cap-motion-paint .cap-icon-inner {
+  animation-name: cap-paint-icon;
+  animation-duration: 1.1s;
+}
+
+.cap-motion-paint .cap-icon-halo {
+  animation-duration: 1.4s;
+}
+
+.cap-motion-search .cap-icon-wrapper {
+  animation-name: cap-search-wrapper;
+  animation-duration: 1.3s;
+}
+
+.cap-motion-search .cap-icon-inner {
+  animation-name: cap-search-icon;
+  animation-duration: 1.1s;
+}
+
+.cap-motion-search .cap-icon-halo {
+  animation-duration: 1.3s;
+}
+
+.cap-motion-mobile .cap-icon-wrapper {
+  animation-name: cap-mobile-wrapper;
+  animation-duration: 0.95s;
+}
+
+.cap-motion-mobile .cap-icon-inner {
+  animation-name: cap-mobile-icon;
+  animation-duration: 0.95s;
+}
+
+.cap-motion-mobile .cap-icon-halo {
+  animation-duration: 1s;
+}
+
+.cap-motion-sms .cap-icon-wrapper {
+  animation-name: cap-sms-wrapper;
+  animation-duration: 1.3s;
+}
+
+.cap-motion-sms .cap-icon-inner {
+  animation-name: cap-sms-icon;
+  animation-duration: 1.3s;
+}
+
+.cap-motion-sms .cap-icon-halo {
+  animation-duration: 1.3s;
+}
+
+.cap-motion-crm .cap-icon-wrapper {
+  animation-name: cap-crm-wrapper;
+  animation-duration: 1.6s;
+}
+
+.cap-motion-crm .cap-icon-inner {
+  animation-name: cap-crm-icon;
+  animation-duration: 1.6s;
+}
+
+.cap-motion-crm .cap-icon-halo {
+  animation-duration: 1.5s;
+}
+
+.cap-motion-star .cap-icon-wrapper {
+  animation-name: cap-star-wrapper;
+  animation-duration: 1.4s;
+}
+
+.cap-motion-star .cap-icon-inner {
+  animation-name: cap-star-icon;
+  animation-duration: 0.95s;
+}
+
+.cap-motion-star .cap-icon-halo {
+  animation-duration: 1.1s;
+}
+
+.cap-motion-tags .cap-icon-wrapper {
+  animation-name: cap-tags-wrapper;
+  animation-duration: 1.4s;
+}
+
+.cap-motion-tags .cap-icon-inner {
+  animation-name: cap-tags-icon;
+  animation-duration: 1.1s;
+}
+
+.cap-motion-tags .cap-icon-halo {
+  animation-duration: 1.3s;
+}
+
+@keyframes cap-shine {
+  from {
+    transform: translateX(-130%);
+  }
+  to {
+    transform: translateX(130%);
+  }
+}
+
+@keyframes cap-halo-pulse {
+  0% {
+    opacity: 0.14;
+    transform: scale(0.94);
+  }
+  50% {
+    opacity: 0.78;
+    transform: scale(1.36);
+  }
+  100% {
+    opacity: 0.16;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes cap-boxes-wrapper {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-7px) rotate(-8deg);
+  }
+  75% {
+    transform: translateY(7px) rotate(8deg);
+  }
+}
+
+@keyframes cap-boxes-icon {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  35% {
+    transform: rotate(12deg) scale(1.08);
+  }
+  70% {
+    transform: rotate(-12deg) scale(1);
+  }
+}
+
+@keyframes cap-chart-wrapper {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes cap-chart-icon {
+  0%,
+  100% {
+    transform: scaleX(1) scaleY(1);
+  }
+  35% {
+    transform: scaleX(0.92) scaleY(1.3);
+  }
+  70% {
+    transform: scaleX(1.1) scaleY(0.82);
+  }
+}
+
+@keyframes cap-shipping-wrapper {
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+  35% {
+    transform: translateX(11px) translateY(-3px);
+  }
+  70% {
+    transform: translateX(-8px) translateY(0);
+  }
+}
+
+@keyframes cap-shipping-icon {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(8deg);
+  }
+  70% {
+    transform: rotate(-8deg);
+  }
+}
+
+@keyframes cap-payment-wrapper {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  40% {
+    transform: rotate(10deg) scale(1.08);
+  }
+  70% {
+    transform: rotate(-10deg) scale(1);
+  }
+}
+
+@keyframes cap-payment-icon {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  65% {
+    transform: rotate(-14deg);
+  }
+}
+
+@keyframes cap-globe-wrapper {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cap-globe-icon {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.12) rotate(-6deg);
+  }
+}
+
+@keyframes cap-paint-wrapper {
+  0%,
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  25% {
+    transform: rotate(-24deg) translateY(-4px);
+  }
+  50% {
+    transform: rotate(14deg) translateY(0);
+  }
+  75% {
+    transform: rotate(-12deg) translateY(-2px);
+  }
+}
+
+@keyframes cap-paint-icon {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  45% {
+    transform: scale(1.14) rotate(-8deg);
+  }
+}
+
+@keyframes cap-search-wrapper {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  45% {
+    transform: scale(1.26) rotate(18deg);
+  }
+}
+
+@keyframes cap-search-icon {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  30% {
+    transform: translateX(-4px) rotate(8deg);
+  }
+  65% {
+    transform: translateX(4px) rotate(0deg);
+  }
+}
+
+@keyframes cap-mobile-wrapper {
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+  20% {
+    transform: translateX(-5px) translateY(-2px);
+  }
+  40% {
+    transform: translateX(5px) translateY(0);
+  }
+  60% {
+    transform: translateX(-5px) translateY(-1px);
+  }
+  80% {
+    transform: translateX(5px) translateY(0);
+  }
+}
+
+@keyframes cap-mobile-icon {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-9deg);
+  }
+  55% {
+    transform: rotate(9deg);
+  }
+  80% {
+    transform: rotate(-9deg);
+  }
+}
+
+@keyframes cap-sms-wrapper {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  35% {
+    transform: translateY(-7px) rotate(-8deg);
+  }
+  70% {
+    transform: translateY(0) rotate(8deg);
+  }
+}
+
+@keyframes cap-sms-icon {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.22);
+    opacity: 0.62;
+  }
+}
+
+@keyframes cap-crm-wrapper {
+  0%,
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  30% {
+    transform: rotate(18deg) translateY(-4px);
+  }
+  65% {
+    transform: rotate(-18deg) translateY(0);
+  }
+}
+
+@keyframes cap-crm-icon {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  35% {
+    transform: scale(1.15) rotate(-10deg);
+  }
+  70% {
+    transform: scale(1) rotate(10deg);
+  }
+}
+
+@keyframes cap-star-wrapper {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  30% {
+    transform: rotate(26deg) scale(1.15);
+  }
+  65% {
+    transform: rotate(-26deg) scale(1);
+  }
+}
+
+@keyframes cap-star-icon {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.14);
+    opacity: 0.35;
+  }
+}
+
+@keyframes cap-tags-wrapper {
+  0%,
+  100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  30% {
+    transform: rotate(-24deg) translateX(4px);
+  }
+  55% {
+    transform: rotate(12deg) translateX(0);
+  }
+  80% {
+    transform: rotate(-10deg) translateX(2px);
+  }
+}
+
+@keyframes cap-tags-icon {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.18) rotate(11deg);
+  }
+}

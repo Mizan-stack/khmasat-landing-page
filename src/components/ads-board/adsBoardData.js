@@ -80,7 +80,7 @@ const ADS_ITEMS = [
 ]
 
 const ADS_PAGE_TEXT = {
-  createService: 'خدمة جديدة',
+  createService: 'إضافة إعلان جديد',
   resultLabel: `تم العثور على ${ADS_ITEMS.length} إعلان`,
   details: 'تفاصيل الإعلان',
   dashboard: 'الذهاب للداشبورد',
