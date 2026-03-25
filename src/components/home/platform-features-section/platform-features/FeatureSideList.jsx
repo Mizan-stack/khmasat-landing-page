@@ -3,9 +3,9 @@ import { FaArrowLeft } from 'react-icons/fa'
 
 const MotionButton = motion.button
 
-function FeatureSideList({ features, activeKey, onChange }) {
+function FeatureSideList({ features, activeKey, onChange, listRef, buttonRefs }) {
   return (
-    <div dir="rtl" className="space-y-3">
+    <div ref={listRef} dir="rtl" className="space-y-3">
       {features.map((item) => {
         const isActive = item.key === activeKey
         const Icon = item.icon
@@ -13,6 +13,14 @@ function FeatureSideList({ features, activeKey, onChange }) {
         return (
           <MotionButton
             key={item.key}
+            ref={(node) => {
+              if (node) {
+                buttonRefs.current.set(item.key, node)
+                return
+              }
+
+              buttonRefs.current.delete(item.key)
+            }}
             type="button"
             onClick={() => onChange(item.key)}
             whileTap={{ scale: 0.96 }}

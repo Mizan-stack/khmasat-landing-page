@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { CountrySelect } from '../../../auth'
+import { CompactCountryCodeSelect } from '../../../auth/country-select'
 import RegisterFormField from './RegisterFormField'
 import { registerInputClass } from './registerInputClass'
 import { useRegisterNowForm } from './useRegisterNowForm'
@@ -7,7 +7,7 @@ import { useRegisterNowForm } from './useRegisterNowForm'
 const MotionDiv = motion.div
 
 function RegisterNowFormPanel() {
-  const { form, selectedCountry, fieldErrors, submitted, updateField, changeCountry, touchField, handleSubmit } = useRegisterNowForm()
+  const { form, fieldErrors, submitted, updateField, changeCountry, touchField, handleSubmit } = useRegisterNowForm()
 
   return (
     <MotionDiv
@@ -17,8 +17,8 @@ function RegisterNowFormPanel() {
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       dir="rtl"
     >
-      <h2 className="text-right text-[clamp(2.1rem,4.4vw,4.8rem)] font-black text-[var(--home-register-title)]">سجل الآن</h2>
-      <p className="mt-2 text-right text-[clamp(1rem,1.6vw,1.5rem)] text-[var(--home-register-text)]">
+      <h2 className="text-right text-[clamp(1.6rem,3.4vw,3rem)] font-black text-[var(--home-register-title)]">سجل الآن</h2>
+      <p className="mt-2 text-right text-[clamp(0.9rem,1.05vw,1.05rem)] text-[var(--home-register-text)]">
         جاهز للانطلاق؟ أخبرنا عن مشروعك وسنساعدك في اختيار الحل المناسب.
       </p>
 
@@ -46,41 +46,45 @@ function RegisterNowFormPanel() {
           </RegisterFormField>
         </div>
 
-        <RegisterFormField label="البريد الإلكتروني" error={fieldErrors.email}>
-          <input
-            type="email"
-            dir="ltr"
-            value={form.email}
-            onChange={(event) => updateField('email', event.target.value)}
-            onBlur={() => touchField('email')}
-            placeholder="أدخل البريد الإلكتروني"
-            className={registerInputClass(fieldErrors.email)}
-          />
-        </RegisterFormField>
-
-        <RegisterFormField label="رقم الهاتف" error={fieldErrors.phone}>
-          <div dir="ltr" className="flex flex-col-reverse gap-3 md:flex-row md:items-start">
+        <div className="grid gap-3 md:grid-cols-[1.02fr_0.98fr]">
+          <RegisterFormField label="البريد الإلكتروني" error={fieldErrors.email}>
             <input
-              type="tel"
-              inputMode="numeric"
+              type="email"
               dir="ltr"
-              value={form.phone}
-              onChange={(event) => updateField('phone', event.target.value)}
-              onBlur={() => touchField('phone')}
-              placeholder={
-                selectedCountry
-                  ? `اكتب رقم ${selectedCountry.name} بدون ${selectedCountry.dialCode}`
-                  : 'اكتب رقم الهاتف'
-              }
-              className={`${registerInputClass(fieldErrors.phone)} w-full md:min-w-0 md:flex-1`}
+              value={form.email}
+              onChange={(event) => updateField('email', event.target.value)}
+              onBlur={() => touchField('email')}
+              placeholder="أدخل البريد الإلكتروني"
+              className={`${registerInputClass(fieldErrors.email)} text-left placeholder-shown:text-right`}
             />
-            <div className="w-full md:w-80 md:flex-none">
-              <CountrySelect value={form.countryIso} onChange={changeCountry} error={fieldErrors.phone} />
-            </div>
-          </div>
-        </RegisterFormField>
+          </RegisterFormField>
 
-        <label className="flex items-center justify-end gap-2 pt-1 text-[clamp(1rem,1.4vw,1.3rem)] font-semibold text-[var(--home-register-item-title)]">
+          <RegisterFormField label="رقم الهاتف" error={fieldErrors.phone}>
+            <div
+              dir="rtl"
+              className={`relative flex h-14 rounded-2xl border ${
+                fieldErrors.phone
+                  ? 'border-red-400/80 bg-red-500/10'
+                  : 'border-[var(--border-soft)] bg-[var(--surface-soft)] focus-within:border-[var(--accent)]'
+              }`}
+            >
+              <CompactCountryCodeSelect value={form.countryIso} onChange={changeCountry} error={fieldErrors.phone} />
+
+              <input
+                type="tel"
+                inputMode="numeric"
+                dir="ltr"
+                value={form.phone}
+                onChange={(event) => updateField('phone', event.target.value)}
+                onBlur={() => touchField('phone')}
+                placeholder="اكتب الرقم"
+                className="h-full min-w-0 flex-1 border-0 bg-transparent px-4 text-left text-[clamp(0.88rem,1vw,1rem)] text-[var(--right-text-primary)] outline-none placeholder-shown:text-right placeholder:text-[var(--text-placeholder)]"
+              />
+            </div>
+          </RegisterFormField>
+        </div>
+
+        <label className="flex items-center justify-end gap-2 pt-1 text-[clamp(0.85rem,1vw,0.95rem)] font-semibold text-[var(--home-register-item-title)]">
           <input
             type="checkbox"
             checked={form.agree}

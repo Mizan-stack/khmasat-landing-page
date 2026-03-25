@@ -69,7 +69,7 @@ function AdsBoardSection() {
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
           transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
-          className={`mt-6 grid gap-5 ${viewMode === 'grid' ? 'lg:grid-cols-2' : 'grid-cols-1'}`}
+          className={`mt-6 grid gap-4 ${viewMode === 'grid' ? 'md:grid-cols-2 xl:grid-cols-4' : 'grid-cols-1'}`}
         >
           {ads.map((item, index) => (
             <AdsAdCard key={`${viewMode}-${item.id}`} item={item} index={index} viewMode={viewMode} />

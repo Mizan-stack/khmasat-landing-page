@@ -1,36 +1,24 @@
 import { Link } from 'react-router-dom'
 import { SIGNUP_FORM_TEXT } from './SignUpFormText'
 
-function SignUpStatusMessages({ otpSent, otpVerified, submitted, hasErrors, touched }) {
+function SignUpStatusMessages({ submitted, hasErrors, touched }) {
   return (
     <>
-      {otpSent && (
-        <p className="rounded-xl border px-4 py-3 text-sm font-bold [background:var(--status-info-bg)] text-[var(--status-info-text)] border-[var(--status-info-border)]">
-          {SIGNUP_FORM_TEXT.otpSent}
-        </p>
-      )}
-
-      {otpVerified && (
-        <p className="rounded-xl border px-4 py-3 text-sm font-bold [background:var(--status-success-bg)] text-[var(--status-success-text)] border-[var(--status-success-border)]">
-          {SIGNUP_FORM_TEXT.otpVerified}
-        </p>
-      )}
-
       {submitted && !hasErrors && (
-        <p className="rounded-xl border px-4 py-3 text-sm font-bold [background:var(--status-success-bg)] text-[var(--status-success-text)] border-[var(--status-success-border)]">
+        <p className="rounded-xl border px-3 py-2.5 text-xs font-bold [background:var(--status-success-bg)] text-[var(--status-success-text)] border-[var(--status-success-border)] md:text-sm">
           {SIGNUP_FORM_TEXT.signupSuccess}
         </p>
       )}
 
       {!submitted && hasErrors && (touched.name || touched.email || touched.phone || touched.password) && (
-        <p className="text-sm font-semibold text-amber-300">{SIGNUP_FORM_TEXT.fieldsWarning}</p>
+        <p className="text-xs font-semibold text-amber-300 md:text-sm">{SIGNUP_FORM_TEXT.fieldsWarning}</p>
       )}
 
-      {!submitted && !otpVerified && !hasErrors && touched.password && (
-        <p className="text-sm font-semibold text-amber-300">{SIGNUP_FORM_TEXT.otpWarning}</p>
+      {!submitted && !hasErrors && touched.password && (
+        <p className="text-xs font-semibold text-amber-300 md:text-sm">{SIGNUP_FORM_TEXT.verificationWarning}</p>
       )}
 
-      <p className="text-center text-sm text-[var(--right-text-muted)]">
+      <p className="text-center text-xs text-[var(--right-text-muted)] md:text-sm">
         {SIGNUP_FORM_TEXT.hasAccount}{' '}
         <Link to="/login" state={{ direction: -1 }} className="font-black text-[var(--accent)]">
           {SIGNUP_FORM_TEXT.loginNow}

@@ -1,6 +1,6 @@
 :root[data-theme='dark'] {
   --home-page-bg: linear-gradient(180deg, #0a1227 0%, #0f1d3d 100%);
-  --home-strip-bg: linear-gradient(90deg, #1a8f8f 0%, #2d88a6 100%);
+  --home-strip-bg: linear-gradient(90deg, #2fa3a3 0%, #4aa9c1 100%);
   --home-nav-bg: rgba(16, 28, 56, 0.94);
   --home-nav-bg-scrolled: rgba(13, 24, 48, 0.78);
   --home-nav-border: rgba(116, 151, 213, 0.34);

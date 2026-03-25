@@ -8,10 +8,10 @@ export const LOGIN_FORM_TEXT = {
   phoneLabel: 'رقم الهاتف',
   passwordLabel: 'كلمة المرور',
   submit: 'الدخول إلى لوحة الإعلانات',
-  success: 'تم التحقق من البيانات بنجاح (واجهة UI فقط).',
+  success: 'تم تسجيل الدخول بنجاح.',
   warning: 'أكمل الحقول بشكل صحيح قبل المتابعة.',
   noAccount: 'ليس لديك حساب معلن؟',
   createAccount: 'أنشئ حساب جديد',
-  emailPlaceholder: 'owner@adsplatform.com',
-  phoneFallbackPlaceholder: 'اكتب رقم الهاتف',
+  emailPlaceholder: 'أدخل البريد الإلكتروني',
+  phoneFallbackPlaceholder: 'اكتب الرقم',
 }

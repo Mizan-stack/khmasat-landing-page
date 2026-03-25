@@ -13,8 +13,8 @@ function RegisterSupportPanel() {
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       dir="rtl"
     >
-      <h2 className="text-right text-[clamp(2.1rem,4.4vw,4.8rem)] font-black text-[var(--home-register-title)]">دعم الأعمال</h2>
-      <p className="mt-2 text-right text-[clamp(1rem,1.6vw,1.5rem)] text-[var(--home-register-text)]">
+      <h2 className="text-right text-[clamp(1.6rem,3.4vw,3rem)] font-black text-[var(--home-register-title)]">دعم الأعمال</h2>
+      <p className="mt-2 text-right text-[clamp(0.9rem,1.05vw,1.05rem)] text-[var(--home-register-text)]">
         هل لديك أسئلة؟ مستشارو الأعمال لدينا هنا للمساعدة.
       </p>
 

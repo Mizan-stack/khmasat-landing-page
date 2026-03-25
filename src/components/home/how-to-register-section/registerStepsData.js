@@ -1,31 +1,31 @@
-﻿import { FaCog, FaEnvelopeOpenText, FaRocket, FaUserPlus } from 'react-icons/fa'
+import { FaCrown, FaIdCard, FaTags, FaUserPlus } from 'react-icons/fa'
 
 const REGISTER_STEPS = [
   {
     number: 1,
     title: 'إنشاء حساب',
-    subtitle: 'أدخل بياناتك الأساسية للبدء',
+    subtitle: 'ابدأ بإنشاء حسابك في دقائق',
     icon: FaUserPlus,
   },
   {
     number: 2,
-    title: 'تفعيل الحساب',
-    subtitle: 'أكد البريد والهاتف خلال لحظات',
-    icon: FaEnvelopeOpenText,
+    title: 'اختار الباقة',
+    subtitle: 'حدد الخطة الأنسب لنشاطك',
+    icon: FaTags,
   },
   {
     number: 3,
-    title: 'إعداد الحساب',
-    subtitle: 'خصص الإعدادات حسب نشاطك',
-    icon: FaCog,
+    title: 'بيانات الحساب',
+    subtitle: 'أكمل بيانات الحساب بسهولة',
+    icon: FaIdCard,
   },
   {
     number: 4,
-    title: 'ابدأ الآن',
-    subtitle: 'انطلق مباشرة في لوحة الإعلانات',
-    icon: FaRocket,
+    title: 'مبروك',
+    subtitle: 'ابدأ بنشر إعلاناتك الآن',
+    icon: FaCrown,
+    celebration: true,
   },
 ]
 
 export { REGISTER_STEPS }
-

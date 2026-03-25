@@ -49,10 +49,10 @@ function HomeFooterSection() {
               transition={{ duration: 0.5 }}
               className="text-right"
             >
-              <h3 className="text-[clamp(2.1rem,3.4vw,4.1rem)] font-black leading-tight text-[var(--home-footer-title)]">
+              <h3 className="text-[clamp(1.5rem,2.5vw,2.7rem)] font-black leading-tight text-[var(--home-footer-title)]">
                 {FOOTER_CONTENT.brandName}
               </h3>
-              <p className="mt-3 max-w-xl text-[clamp(1.15rem,1.8vw,2rem)] leading-relaxed text-[var(--home-footer-text)]">
+              <p className="mt-3 max-w-xl text-[clamp(0.92rem,1.05vw,1.1rem)] leading-relaxed text-[var(--home-footer-text)]">
                 {FOOTER_CONTENT.brandDescription}
               </p>
             </motion.div>
@@ -64,13 +64,13 @@ function HomeFooterSection() {
               transition={{ duration: 0.5, delay: 0.07 }}
               className="text-right"
             >
-              <h4 className="text-[clamp(1.8rem,2.9vw,3.2rem)] font-black text-[var(--home-footer-title)]">{FOOTER_CONTENT.linksTitle}</h4>
+              <h4 className="text-[clamp(1.25rem,1.9vw,2rem)] font-black text-[var(--home-footer-title)]">{FOOTER_CONTENT.linksTitle}</h4>
               <ul className="mt-4 space-y-2">
                 {FOOTER_LINKS.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="inline-flex text-[clamp(1.15rem,1.8vw,2rem)] font-bold text-[var(--home-footer-link)] transition-all duration-300 hover:translate-x-[-4px] hover:text-[var(--home-footer-link-hover)]"
+                      className="inline-flex text-[clamp(0.92rem,1.05vw,1.1rem)] font-bold text-[var(--home-footer-link)] transition-all duration-300 hover:translate-x-[-4px] hover:text-[var(--home-footer-link-hover)]"
                     >
                       {link.label}
                     </a>
@@ -86,8 +86,8 @@ function HomeFooterSection() {
               transition={{ duration: 0.5, delay: 0.12 }}
               className="text-right"
             >
-              <h4 className="text-[clamp(1.8rem,2.9vw,3.2rem)] font-black text-[var(--home-footer-title)]">{FOOTER_CONTENT.newsletterTitle}</h4>
-              <p className="mt-3 max-w-xl text-[clamp(1.1rem,1.7vw,1.9rem)] text-[var(--home-footer-text)]">
+              <h4 className="text-[clamp(1.25rem,1.9vw,2rem)] font-black text-[var(--home-footer-title)]">{FOOTER_CONTENT.newsletterTitle}</h4>
+              <p className="mt-3 max-w-xl text-[clamp(0.92rem,1.05vw,1.05rem)] text-[var(--home-footer-text)]">
                 {FOOTER_CONTENT.newsletterDescription}
               </p>
 

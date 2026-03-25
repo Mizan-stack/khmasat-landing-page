@@ -1,4 +1,7 @@
 export { default as AuthFormField } from './AuthFormField'
+export { default as AuthBrandBadge } from './AuthBrandBadge'
+export { default as AuthContactFieldsRow } from './AuthContactFieldsRow'
+export { default as AuthLanguageBadge } from './AuthLanguageBadge'
 export { default as PhoneFieldRow } from './PhoneFieldRow'
 export { default as PasswordInputField } from './PasswordInputField'
 export { inputClass } from './inputClass'

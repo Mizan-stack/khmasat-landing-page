@@ -21,9 +21,9 @@ function HomeFaqSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55 }}
-      className="w-full py-20 md:py-28"
+      className="w-full py-16 md:py-20"
     >
-      <div className="relative w-full overflow-hidden border-y border-[var(--home-faq-border)] [background:var(--home-faq-bg)] py-12 md:py-16">
+      <div className="relative w-full overflow-hidden border-y border-[var(--home-faq-border)] [background:var(--home-faq-bg)] py-10 md:py-12">
         <MotionSpan
           aria-hidden
           animate={{ x: [0, 38, 0], y: [0, -26, 0], opacity: [0.2, 0.45, 0.2] }}
@@ -71,19 +71,19 @@ function HomeFaqSection() {
                 boxShadow: ['0 14px 28px rgba(52,107,238,0.2)', '0 24px 34px rgba(52,107,238,0.32)', '0 14px 28px rgba(52,107,238,0.2)'],
               }}
               transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-              className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-3xl bg-[var(--home-faq-badge-bg)] text-6xl font-black text-[var(--home-faq-badge-text)]"
+              className="mb-4 inline-flex h-20 w-20 items-center justify-center rounded-3xl bg-[var(--home-faq-badge-bg)] text-6xl font-black text-[var(--home-faq-badge-text)]"
             >
               {FAQ_SIDE_CONTENT.badge}
             </motion.span>
 
-            <h2 className="text-[clamp(2.3rem,5vw,5.8rem)] font-black leading-[1.02] text-[var(--home-faq-side-title)]">
+            <h2 className="text-[clamp(1.65rem,3.7vw,3.35rem)] font-black leading-[1.02] text-[var(--home-faq-side-title)]">
               {FAQ_SIDE_CONTENT.title}
               <span className="mt-2 block w-fit border-b-[6px] border-[var(--home-faq-side-underline)] text-[var(--home-faq-side-accent)]">
                 {FAQ_SIDE_CONTENT.highlightedTitle}
               </span>
             </h2>
 
-            <p className="mt-6 max-w-2xl text-[clamp(1.15rem,1.9vw,2rem)] leading-relaxed text-[var(--home-faq-side-text)]">
+            <p className="mt-4 max-w-2xl text-[clamp(0.95rem,1.15vw,1.15rem)] leading-relaxed text-[var(--home-faq-side-text)]">
               {FAQ_SIDE_CONTENT.description}
             </p>
           </MotionDiv>

@@ -1,4 +1,4 @@
-﻿import { motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { CAPABILITIES } from './capabilitiesData'
 import './capabilityIconAnimations.css'
 
@@ -15,9 +15,9 @@ function HomeCapabilitiesSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55 }}
-      className="mx-auto w-full max-w-[1320px] px-3 pb-24 md:px-6"
+      className="mx-auto w-full max-w-[1320px] px-3 pb-20 md:px-6 md:pb-24"
     >
-      <div className="relative overflow-hidden rounded-[32px] border border-[var(--home-card-border)] bg-[var(--home-card-bg)] p-6 md:p-8">
+      <div className="relative overflow-hidden rounded-[32px] border border-[var(--home-card-border)] bg-[var(--home-card-bg)] p-5 md:p-6">
         <motion.span
           aria-hidden
           animate={{ x: [0, 22, 0], y: [0, -14, 0], opacity: [0.35, 0.65, 0.35] }}
@@ -26,16 +26,12 @@ function HomeCapabilitiesSection() {
         />
 
         <div className="relative z-10">
-          <span className="inline-flex rounded-full border border-[var(--home-cap-badge-border)] bg-[var(--home-cap-badge-bg)] px-4 py-1 text-xs font-bold text-[var(--home-cap-badge-text)]">
-            حلول احترافية لخدمة نمو أعمالك
-          </span>
-
           <MotionHeader
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.4, delay: 0.05 }}
-            className="mt-4 text-center text-[clamp(2rem,4.7vw,4.7rem)] font-black leading-tight text-[var(--home-cap-title)]"
+            className="text-center text-[clamp(1.55rem,3.4vw,3.05rem)] font-black leading-tight text-[var(--home-cap-title)]"
           >
             منصة واحدة..
             <br />
@@ -47,12 +43,12 @@ function HomeCapabilitiesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.42, delay: 0.12 }}
-            className="mx-auto mt-3 max-w-3xl text-center text-sm leading-relaxed text-[var(--home-cap-text)] md:text-lg"
+            className="mx-auto mt-2 max-w-3xl text-center text-[0.92rem] leading-relaxed text-[var(--home-cap-text)] md:text-[1rem]"
           >
             نقدّم منظومة تقنية متكاملة تمنح متجرك تجربة تشغيل أسرع، وتحكم أفضل، ونتائج بيع أعلى.
           </MotionParagraph>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {CAPABILITIES.map((item, index) => {
               const Icon = item.icon
               const delay = `${(index % 4) * 0.12}s`
@@ -75,27 +71,30 @@ function HomeCapabilitiesSection() {
                   />
 
                   <div className="relative z-10 text-right">
-                    <span
-                      className="cap-icon-wrapper relative inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl border text-lg shadow-[0_8px_20px_rgba(0,0,0,0.08)]"
-                      style={{
-                        '--cap-delay': delay,
-                        color: item.iconColor,
-                        backgroundColor: item.iconBg,
-                        borderColor: item.iconBorder,
-                      }}
-                    >
+                    <div className="flex items-center justify-start gap-3" dir="rtl">
                       <span
-                        aria-hidden
-                        className="cap-icon-halo pointer-events-none absolute inset-0 rounded-xl blur-[2px]"
-                        style={{ backgroundColor: item.iconColor, opacity: 0.2 }}
-                      />
+                        className="cap-icon-wrapper relative inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border text-lg shadow-[0_8px_20px_rgba(0,0,0,0.08)]"
+                        style={{
+                          '--cap-delay': delay,
+                          color: item.iconColor,
+                          backgroundColor: item.iconBg,
+                          borderColor: item.iconBorder,
+                        }}
+                      >
+                        <span
+                          aria-hidden
+                          className="cap-icon-halo pointer-events-none absolute inset-0 rounded-xl blur-[2px]"
+                          style={{ backgroundColor: item.iconColor, opacity: 0.2 }}
+                        />
 
-                      <span className="cap-icon-inner relative inline-flex origin-center">
-                        <Icon />
+                        <span className="cap-icon-inner relative inline-flex origin-center">
+                          <Icon />
+                        </span>
                       </span>
-                    </span>
 
-                    <h3 className="mt-3 text-lg font-black text-[var(--home-cap-card-title)]">{item.title}</h3>
+                      <h3 className="text-lg font-black text-[var(--home-cap-card-title)]">{item.title}</h3>
+                    </div>
+
                     <p className="mt-1 text-sm leading-relaxed text-[var(--home-cap-card-text)]">{item.description}</p>
                   </div>
                 </MotionArticle>

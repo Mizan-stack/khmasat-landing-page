@@ -1,4 +1,4 @@
-﻿import { FEATURES } from './featuresData'
+import { FEATURES } from './featuresData'
 import { motion } from 'framer-motion'
 
 const MotionArticle = motion.article
@@ -8,14 +8,14 @@ const MotionText = motion.p
 
 function HomeFeaturesSection() {
   return (
-    <section id="why-us" className="mx-auto w-full max-w-[1320px] px-3 pb-24 md:px-6">
-      <div className="rounded-[30px] border border-[var(--home-card-border)] bg-[var(--home-card-bg)] p-6 shadow-[0_20px_55px_rgba(18,27,48,0.12)] md:p-8">
-        <h2 className="text-right text-3xl font-black text-[var(--home-hero-title)] md:text-4xl">لماذا منصتنا؟</h2>
-        <p className="mt-2 text-right text-base text-[var(--home-text-muted)] md:text-lg">
+    <section id="why-us" className="mx-auto w-full max-w-[1320px] px-3 pb-20 md:px-6 md:pb-24">
+      <div className="rounded-[30px] border border-[var(--home-card-border)] bg-[var(--home-card-bg)] p-5 shadow-[0_20px_55px_rgba(18,27,48,0.12)] md:p-6">
+        <h2 className="text-right text-xl font-black text-[var(--home-hero-title)] md:text-2xl">لماذا منصتنا؟</h2>
+        <p className="mt-2 text-right text-[0.92rem] text-[var(--home-text-muted)] md:text-sm">
           حلول مرنة تساعدك على إطلاق حملات أسرع وتحقيق نتائج أفضل.
         </p>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-3 [perspective:1200px]">
+        <div className="mt-5 grid gap-4 md:grid-cols-3 [perspective:1200px]">
           {FEATURES.map((feature, index) => (
             <MotionArticle
               key={feature.title}
@@ -62,7 +62,7 @@ function HomeFeaturesSection() {
                 <MotionHeader
                   whileHover={{ x: -4, color: 'var(--home-hero-title)' }}
                   transition={{ duration: 0.25 }}
-                  className="mt-3 text-right text-xl font-black text-[var(--home-text-primary)]"
+                  className="mt-3 text-right text-base font-black text-[var(--home-text-primary)]"
                 >
                   {feature.title}
                 </MotionHeader>

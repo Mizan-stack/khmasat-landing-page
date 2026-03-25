@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useSignUpForm } from '../../../hooks/useSignUpForm'
 import OtpVerificationModal from '../otp-modal/OtpVerificationModal'
-import { AuthFormField, PasswordInputField, PhoneFieldRow, inputClass } from '../shared'
+import { AuthContactFieldsRow, AuthFormField, PasswordInputField, inputClass } from '../shared'
 import SignUpActionButtons from './SignUpActionButtons'
 import SignUpCardHeader from './SignUpCardHeader'
 import { SIGNUP_FORM_TEXT } from './SignUpFormText'
@@ -19,20 +19,17 @@ function SignUpFormCard() {
     fieldErrors,
     touched,
     submitted,
-    otpSent,
-    otpOpen,
-    otpCode,
-    otpError,
-    otpVerified,
+    verificationStep,
+    verificationCode,
+    verificationError,
     hasErrors,
     selectedCountry,
     updateField,
     markFieldTouched,
     changeCountry,
-    handleRequestOtp,
-    updateOtpCode,
-    closeOtpModal,
-    verifyOtpCode,
+    updateVerificationCode,
+    closeVerificationModal,
+    confirmVerificationStep,
     handleSubmit,
     resetSuccess,
   } = useSignUpForm()
@@ -42,6 +39,15 @@ function SignUpFormCard() {
   const phoneError = touched.phone ? fieldErrors.phone : ''
   const passwordError = touched.password ? fieldErrors.password : ''
   const phoneLabel = selectedCountry ? `${selectedCountry.dialCode} ${form.phone || '000000000'}` : form.phone
+  const verificationTitle =
+    verificationStep === 'email'
+      ? SIGNUP_FORM_TEXT.emailVerificationTitle
+      : SIGNUP_FORM_TEXT.phoneVerificationTitle
+  const verificationDescription =
+    verificationStep === 'email'
+      ? SIGNUP_FORM_TEXT.emailVerificationDescription
+      : SIGNUP_FORM_TEXT.phoneVerificationDescription
+  const verificationTargetLabel = verificationStep === 'email' ? form.email : phoneLabel
 
   const phonePlaceholder = selectedCountry
     ? `اكتب رقم ${selectedCountry.name} بدون ${selectedCountry.dialCode}`
@@ -53,7 +59,7 @@ function SignUpFormCard() {
         initial={{ opacity: 0, x: -90 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        className="relative flex h-full flex-col rounded-[30px] border border-[var(--border-strong)] [background:var(--right-panel-bg)] px-6 py-5 shadow-[0_24px_80px_rgba(8,15,45,0.2)] backdrop-blur-xl md:px-8 md:py-6"
+        className="relative flex h-full flex-col rounded-[28px] border border-[var(--border-strong)] [background:var(--right-panel-bg)] px-5 py-4 shadow-[0_24px_80px_rgba(8,15,45,0.2)] backdrop-blur-xl md:px-6 md:py-5"
       >
         <SignUpCardHeader />
         <SignUpIntroCard />
@@ -64,7 +70,7 @@ function SignUpFormCard() {
           transition={{ duration: 0.7, delay: 0.28 }}
           onSubmit={handleSubmit}
           noValidate
-          className="mt-5 space-y-4 rounded-3xl border border-[var(--border-soft)] bg-[var(--surface-panel)] p-4 md:p-5"
+          className="mt-4 space-y-3 rounded-[26px] border border-[var(--border-soft)] bg-[var(--surface-panel)] p-3.5 md:p-4"
         >
           <AuthFormField label={SIGNUP_FORM_TEXT.nameLabel} error={nameError}>
             <input
@@ -80,35 +86,28 @@ function SignUpFormCard() {
             />
           </AuthFormField>
 
-          <AuthFormField label={SIGNUP_FORM_TEXT.emailLabel} error={emailError}>
-            <input
-              type="email"
-              dir="ltr"
-              value={form.email}
-              onChange={(event) => {
-                updateField('email', event.target.value)
-                resetSuccess()
-              }}
-              onBlur={() => markFieldTouched('email')}
-              placeholder={SIGNUP_FORM_TEXT.emailPlaceholder}
-              className={inputClass(emailError)}
-            />
-          </AuthFormField>
-
-          <AuthFormField label={SIGNUP_FORM_TEXT.phoneLabel} error={phoneError}>
-            <PhoneFieldRow
-              value={form.phone}
-              onChange={(event) => {
-                updateField('phone', event.target.value)
-                resetSuccess()
-              }}
-              onBlur={() => markFieldTouched('phone')}
-              placeholder={phonePlaceholder}
-              error={phoneError}
-              countryIso={form.countryIso}
-              onChangeCountry={changeCountry}
-            />
-          </AuthFormField>
+          <AuthContactFieldsRow
+            emailLabel={SIGNUP_FORM_TEXT.emailLabel}
+            emailPlaceholder={SIGNUP_FORM_TEXT.emailPlaceholder}
+            emailValue={form.email}
+            onEmailChange={(event) => {
+              updateField('email', event.target.value)
+              resetSuccess()
+            }}
+            onEmailBlur={() => markFieldTouched('email')}
+            emailError={emailError}
+            phoneLabel={SIGNUP_FORM_TEXT.phoneLabel}
+            phonePlaceholder={phonePlaceholder}
+            phoneValue={form.phone}
+            onPhoneChange={(event) => {
+              updateField('phone', event.target.value)
+              resetSuccess()
+            }}
+            onPhoneBlur={() => markFieldTouched('phone')}
+            phoneError={phoneError}
+            countryIso={form.countryIso}
+            onChangeCountry={changeCountry}
+          />
 
           <AuthFormField label={SIGNUP_FORM_TEXT.passwordLabel} error={passwordError}>
             <PasswordInputField
@@ -124,11 +123,9 @@ function SignUpFormCard() {
             />
           </AuthFormField>
 
-          <SignUpActionButtons onRequestOtp={handleRequestOtp} />
+          <SignUpActionButtons />
 
           <SignUpStatusMessages
-            otpSent={otpSent}
-            otpVerified={otpVerified}
             submitted={submitted}
             hasErrors={hasErrors}
             touched={touched}
@@ -137,13 +134,16 @@ function SignUpFormCard() {
       </MotionSection>
 
       <OtpVerificationModal
-        isOpen={otpOpen}
-        phoneLabel={phoneLabel}
-        code={otpCode}
-        error={otpError}
-        onCodeChange={updateOtpCode}
-        onClose={closeOtpModal}
-        onVerify={verifyOtpCode}
+        isOpen={Boolean(verificationStep)}
+        title={verificationTitle}
+        description={verificationDescription}
+        targetLabel={verificationTargetLabel}
+        code={verificationCode}
+        error={verificationError}
+        confirmText={SIGNUP_FORM_TEXT.confirmVerification}
+        onCodeChange={updateVerificationCode}
+        onClose={closeVerificationModal}
+        onVerify={confirmVerificationStep}
       />
     </>
   )

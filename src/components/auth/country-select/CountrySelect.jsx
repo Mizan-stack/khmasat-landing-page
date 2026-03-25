@@ -43,11 +43,11 @@ function CountrySelect({ value, onChange, error }) {
   }
 
   return (
-    <div className="relative w-full md:w-80" ref={containerRef}>
+    <div className="relative w-full md:w-64" ref={containerRef}>
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`group flex h-12 w-full items-center justify-between rounded-2xl border px-4 text-right transition-all duration-300 ${
+        className={`group flex h-11 w-full items-center justify-between rounded-2xl border px-3 text-right transition-all duration-300 ${
           error
             ? 'border-red-400/80 bg-red-500/10 text-red-100'
             : 'border-[var(--border-soft)] bg-[var(--surface-soft)] text-[var(--right-text-primary)] hover:border-[var(--accent)]'
@@ -55,10 +55,10 @@ function CountrySelect({ value, onChange, error }) {
       >
         <span className="flex items-center gap-2">
           <FlagIcon isoCode={selectedCountry.isoCode} />
-          <span className="text-sm font-bold">{selectedCountry.name}</span>
+          <span className="text-xs font-bold md:text-sm">{selectedCountry.name}</span>
         </span>
         <span className="flex items-center gap-2">
-          <span className="text-sm font-extrabold text-[var(--accent)]">{selectedCountry.dialCode}</span>
+          <span className="text-xs font-extrabold text-[var(--accent)] md:text-sm">{selectedCountry.dialCode}</span>
           <span
             className={`text-xs text-[var(--text-muted)] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
           >
@@ -76,17 +76,17 @@ function CountrySelect({ value, onChange, error }) {
             transition={{ duration: 0.22, ease: 'easeOut' }}
             className="absolute right-0 z-20 mt-2 w-full overflow-hidden rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-panel)] shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-md"
           >
-            <div className="p-3">
+            <div className="p-2.5">
               <input
                 ref={searchInputRef}
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={COUNTRY_SELECT_TEXT.searchPlaceholder}
-                className="h-10 w-full rounded-xl border border-[var(--border-soft)] bg-[var(--surface-soft)] px-3 text-sm text-[var(--text-primary)] outline-none transition-colors focus:border-[var(--accent)]"
+                className="h-9 w-full rounded-xl border border-[var(--border-soft)] bg-[var(--surface-soft)] px-3 text-xs text-[var(--text-primary)] outline-none transition-colors focus:border-[var(--accent)] md:text-sm"
               />
             </div>
 
-            <div className="max-h-72 space-y-3 overflow-y-auto px-3 pb-3 pe-2">
+            <div className="max-h-72 space-y-2.5 overflow-y-auto px-2.5 pb-2.5 pe-2">
               {popularCountries.length > 0 && (
                 <CountrySection
                   title={COUNTRY_SELECT_TEXT.popularSection}
@@ -106,7 +106,7 @@ function CountrySelect({ value, onChange, error }) {
               )}
 
               {popularCountries.length === 0 && otherCountries.length === 0 && (
-                <p className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface-soft)] px-3 py-4 text-center text-sm text-[var(--text-muted)]">
+                <p className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface-soft)] px-3 py-4 text-center text-xs text-[var(--text-muted)] md:text-sm">
                   {COUNTRY_SELECT_TEXT.emptyResults}
                 </p>
               )}

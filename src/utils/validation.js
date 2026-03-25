@@ -73,7 +73,7 @@ export function validatePhone(value, country) {
 }
 
 export function validateOtpCode(value) {
-  if (!value) return 'رمز OTP مطلوب'
-  if (value.length !== 6) return 'رمز OTP يجب أن يكون 6 أرقام'
+  if (!value) return 'رمز التحقق مطلوب'
+  if (value.length !== 6) return 'رمز التحقق يجب أن يكون 6 أرقام'
   return ''
 }

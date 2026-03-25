@@ -2,12 +2,12 @@ import AuthBackdrop from './AuthBackdrop'
 
 function AuthPageLayout({ marketing, form, reverse = false }) {
   return (
-    <main className="relative min-h-screen overflow-x-hidden px-3 py-3 md:px-6 md:py-5">
+    <main className="relative flex min-h-dvh items-start overflow-x-hidden overflow-y-auto px-3 py-2 md:items-center md:px-4 md:py-3">
       <AuthBackdrop />
 
-      <section className="relative z-10 mx-auto grid w-full max-w-[1320px] grid-cols-1 gap-4 lg:grid-cols-[1fr_0.9fr]">
-        <div className={reverse ? 'lg:order-2' : 'lg:order-1'}>{marketing}</div>
-        <div className={reverse ? 'lg:order-1' : 'lg:order-2'}>{form}</div>
+      <section className="relative z-10 mx-auto grid w-full max-w-[1280px] grid-cols-1 gap-3 md:grid-cols-[0.95fr_1fr] md:gap-4">
+        <div className={`hidden md:block ${reverse ? 'md:order-2' : 'md:order-1'}`}>{marketing}</div>
+        <div className={reverse ? 'md:order-1' : 'md:order-2'}>{form}</div>
       </section>
     </main>
   )

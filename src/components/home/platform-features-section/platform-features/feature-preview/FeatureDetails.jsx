@@ -15,14 +15,13 @@ function FeatureDetails({ item }) {
           color: item.accent,
           backgroundColor: item.accentSoft,
           borderColor: `${item.accent}5c`,
-          boxShadow: `0 18px 35px ${item.glow}`,
         }}
       >
         <item.icon />
       </MotionDiv>
 
-      <h3 className="mt-4 text-5xl font-black leading-tight text-[var(--home-power-title)]">{item.title}</h3>
-      <p className="mt-4 max-w-xl text-xl leading-relaxed text-[var(--home-power-text)]">{item.description}</p>
+      <h3 className="mt-4 text-3xl font-black leading-tight text-[var(--home-power-title)] md:text-[2.15rem]">{item.title}</h3>
+      <p className="mt-4 max-w-xl text-sm leading-relaxed text-[var(--home-power-text)] md:text-base">{item.description}</p>
 
       <div className="mt-6 flex flex-wrap gap-3">
         {item.chips.map((chip, index) => (

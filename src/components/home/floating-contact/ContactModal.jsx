@@ -111,7 +111,7 @@ function ContactModal({ onClose }) {
           <FaXmark />
         </button>
 
-        <h3 id="contact-modal-title" className="text-center text-4xl font-black text-[var(--home-contact-title)] md:text-5xl">
+        <h3 id="contact-modal-title" className="text-center text-2xl font-black text-[var(--home-contact-title)] md:text-3xl">
           {CONTACT_MODAL_TEXT.title}
         </h3>
 

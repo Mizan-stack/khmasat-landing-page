@@ -3,7 +3,18 @@ import { useEffect, useRef } from 'react'
 
 const MotionDiv = motion.div
 
-function OtpVerificationModal({ isOpen, phoneLabel, code, error, onCodeChange, onClose, onVerify }) {
+function OtpVerificationModal({
+  isOpen,
+  title,
+  description,
+  targetLabel,
+  code,
+  error,
+  confirmText,
+  onCodeChange,
+  onClose,
+  onVerify,
+}) {
   const inputRef = useRef(null)
 
   useEffect(() => {
@@ -51,12 +62,10 @@ function OtpVerificationModal({ isOpen, phoneLabel, code, error, onCodeChange, o
             />
 
             <div className="relative z-10">
-              <h3 className="text-right text-3xl font-black text-[var(--right-text-primary)]">تحقق OTP</h3>
-              <p className="mt-2 text-right text-sm leading-relaxed text-[var(--right-text-muted)]">
-                أدخل رمز التحقق المكوّن من 6 أرقام المرسل إلى:
-              </p>
+              <h3 className="text-right text-xl font-black text-[var(--right-text-primary)]">{title}</h3>
+              <p className="mt-2 text-right text-sm leading-relaxed text-[var(--right-text-muted)]">{description}</p>
               <p className="mt-1 text-left text-sm font-black tracking-wide text-[var(--accent)]" dir="ltr">
-                {phoneLabel}
+                {targetLabel}
               </p>
 
               <input
@@ -70,13 +79,13 @@ function OtpVerificationModal({ isOpen, phoneLabel, code, error, onCodeChange, o
                 className="mt-4 h-12 w-full rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-soft)] px-4 text-center text-xl font-black tracking-[0.35em] text-[var(--right-text-primary)] outline-none transition-colors placeholder:tracking-normal placeholder:text-[var(--text-placeholder)] focus:border-[var(--accent)]"
               />
 
-              <div className="mt-3 grid grid-cols-6 gap-2">
+              <div className="mt-3 grid grid-cols-6 gap-2" dir="ltr">
                 {Array.from({ length: 6 }).map((_, index) => (
                   <span
                     key={index}
                     className="flex h-10 items-center justify-center rounded-xl border border-[var(--border-soft)] bg-[var(--surface-soft)] text-base font-black text-[var(--right-text-primary)]"
                   >
-                    {code[index] ?? '•'}
+                    {code[index] ?? '-'}
                   </span>
                 ))}
               </div>
@@ -97,7 +106,7 @@ function OtpVerificationModal({ isOpen, phoneLabel, code, error, onCodeChange, o
                   className="group relative h-11 overflow-hidden rounded-2xl text-sm font-black text-slate-950"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-[var(--accent)] via-[var(--accent-2)] to-[var(--accent-3)] transition-transform duration-500 group-hover:scale-105" />
-                  <span className="relative">Verify</span>
+                  <span className="relative">{confirmText}</span>
                 </button>
               </div>
             </div>

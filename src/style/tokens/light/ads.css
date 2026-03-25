@@ -21,4 +21,20 @@
   --ads-button-ghost-bg: rgba(53, 190, 184, 0.08);
   --ads-button-ghost-border: rgba(53, 190, 184, 0.55);
   --ads-button-ghost-text: #2da9a3;
+  --ads-nav-bg: rgba(255, 255, 255, 0.8);
+  --ads-nav-border: rgba(188, 204, 228, 0.86);
+  --ads-nav-shadow: rgba(18, 34, 62, 0.12);
+  --ads-nav-soft-bg: rgba(243, 248, 255, 0.92);
+  --ads-nav-soft-border: rgba(180, 197, 224, 0.68);
+  --ads-nav-avatar-bg: linear-gradient(135deg, #36c0bb 0%, #49a4e8 100%);
+  --ads-nav-accent-text: #249fa7;
+  --ads-welcome-bg: linear-gradient(140deg, rgba(38, 74, 203, 0.98) 0%, rgba(40, 116, 223, 0.94) 48%, rgba(41, 191, 204, 0.9) 100%);
+  --ads-welcome-border: rgba(214, 232, 255, 0.72);
+  --ads-welcome-glow: rgba(129, 233, 255, 0.34);
+  --ads-welcome-muted: rgba(239, 246, 255, 0.9);
+  --ads-welcome-pill-bg: rgba(255, 255, 255, 0.15);
+  --ads-welcome-pill-border: rgba(255, 255, 255, 0.22);
+  --ads-welcome-card-bg: rgba(255, 255, 255, 0.14);
+  --ads-welcome-card-border: rgba(255, 255, 255, 0.16);
+  --ads-welcome-close-bg: rgba(255, 255, 255, 0.14);
 }

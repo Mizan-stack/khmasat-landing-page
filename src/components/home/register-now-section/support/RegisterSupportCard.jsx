@@ -21,11 +21,11 @@ function RegisterSupportCard({ item, index }) {
       <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--home-register-icon-border)] bg-[var(--home-register-icon-bg)] text-3xl text-[var(--home-register-icon)]">
         <Icon />
       </span>
-      <h3 className="mt-4 text-[clamp(1.6rem,2.4vw,2.2rem)] font-black text-[var(--home-register-item-title)]">{item.title}</h3>
-      <p className="mt-1 text-[clamp(1rem,1.5vw,1.3rem)] text-[var(--home-register-item-muted)]">{item.subtitle}</p>
+      <h3 className="mt-4 text-[clamp(1.1rem,1.5vw,1.45rem)] font-black text-[var(--home-register-item-title)]">{item.title}</h3>
+      <p className="mt-1 text-[clamp(0.85rem,1.05vw,1rem)] text-[var(--home-register-item-muted)]">{item.subtitle}</p>
       <p
         dir={isContactValue ? 'ltr' : 'rtl'}
-        className={`mt-3 max-w-full text-[clamp(1rem,1.3vw,1.2rem)] font-bold leading-tight text-[var(--home-register-link)] underline decoration-1 underline-offset-2 ${
+        className={`mt-3 max-w-full text-[clamp(0.85rem,1vw,0.95rem)] font-bold leading-tight text-[var(--home-register-link)] underline decoration-1 underline-offset-2 ${
           isContactValue ? 'break-all text-left [unicode-bidi:plaintext]' : 'text-right'
         }`}
       >

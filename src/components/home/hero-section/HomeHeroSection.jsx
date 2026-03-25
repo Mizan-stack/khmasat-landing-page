@@ -1,44 +1,86 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { SOCIAL_LINKS } from '../top-bar/socialLinks'
 import HomeStoreIllustration from './HomeStoreIllustration'
 
+const MotionAnchor = motion.a
 const MotionDiv = motion.div
+
+function HeroSocialLinks({ desktop = false }) {
+  return (
+    <div
+      dir="ltr"
+      className={
+        desktop
+          ? 'flex flex-col items-center gap-3 rounded-r-[28px] border border-[var(--home-nav-border)] bg-white/85 py-4 pl-4 pr-5 shadow-[0_18px_42px_rgba(19,29,55,0.14)] backdrop-blur'
+          : 'flex w-fit flex-col items-center gap-3 rounded-[28px] border border-[var(--home-nav-border)] bg-white/80 px-3 py-3 shadow-[0_12px_28px_rgba(19,29,55,0.1)] backdrop-blur'
+      }
+    >
+      {SOCIAL_LINKS.map((item, index) => (
+        <MotionAnchor
+          key={item.label}
+          href={item.href}
+          target="_blank"
+          rel="noreferrer"
+          initial={{ opacity: 0, x: -12 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.34, delay: 0.06 * index }}
+          whileHover={{ y: -4, scale: 1.06 }}
+          whileTap={{ scale: 0.92 }}
+          className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--home-nav-border)] bg-[var(--home-surface-soft)] text-[var(--home-accent)] shadow-[0_10px_22px_rgba(33,143,185,0.12)] transition-all"
+          aria-label={item.label}
+        >
+          <item.icon className="text-base transition-transform duration-300 group-hover:scale-110" />
+        </MotionAnchor>
+      ))}
+    </div>
+  )
+}
 
 function HomeHeroSection() {
   return (
-    <section className="mx-auto w-full max-w-[1320px] px-3 pb-16 pt-10 md:px-6 md:pt-14">
-      <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="order-2 lg:order-1">
-          <HomeStoreIllustration />
-        </div>
+    <section className="relative w-full overflow-x-clip pb-14 pt-8 md:pb-20 md:pt-10">
+      <div className="absolute left-0 top-1/2 z-20 hidden -translate-y-1/2 xl:block">
+        <HeroSocialLinks desktop />
+      </div>
 
-        <MotionDiv
-          initial={{ opacity: 0, x: 55 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.65, delay: 0.08 }}
-          className="order-1 text-right lg:order-2"
-        >
-          <p className="text-base font-bold text-[var(--home-accent)] md:text-lg">نمو أسرع لحملاتك الإعلانية</p>
-          <h1 className="mt-3 text-[clamp(2.1rem,5.4vw,5.2rem)] font-black leading-tight text-[var(--home-hero-title)]">
-            انطلق بتجارتك
-            <br />
-            الإلكترونية
-          </h1>
-          <p className="mt-5 text-[clamp(1rem,1.6vw,2rem)] leading-relaxed text-[var(--home-text-primary)]">
-            نحن متخصصون في بناء متاجر احترافية، وإنشاء تجارب رقمية تفاعلية للعلامات التجارية. ابدأ رحلتك الرقمية اليوم.
-          </p>
-
-          <div className="mt-8">
-            <Link
-              to="/signup"
-              state={{ direction: 1 }}
-              className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full px-10 text-xl font-black text-white shadow-[0_16px_35px_rgba(33,143,185,0.32)]"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-[var(--home-accent)] to-[var(--home-accent-2)] transition-transform duration-500 group-hover:scale-105" />
-              <span className="relative">ابدأ متجرك الآن</span>
-            </Link>
+      <div className="mx-auto w-full max-w-[1320px] px-3 md:px-6">
+        <div className="grid items-center gap-7 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="order-2 lg:order-1">
+            <HomeStoreIllustration />
           </div>
-        </MotionDiv>
+
+          <MotionDiv
+            initial={{ opacity: 0, x: 55 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, delay: 0.08 }}
+            className="order-1 text-right lg:order-2"
+          >
+            <div className="mb-4 flex justify-start xl:hidden">
+              <HeroSocialLinks />
+            </div>
+
+            <h1 className="text-[clamp(1.55rem,3.8vw,3.25rem)] font-black leading-tight text-[var(--home-hero-title)]">
+              انطلق بتجارتك
+              <br />
+              الإلكترونية
+            </h1>
+            <p className="mt-4 text-[clamp(0.92rem,1.05vw,1.1rem)] leading-relaxed text-[var(--home-text-primary)]">
+              نحن متخصصون في بناء متاجر احترافية، وإنشاء تجارب رقمية تفاعلية للعلامات التجارية. ابدأ رحلتك الرقمية اليوم.
+            </p>
+
+            <div className="mt-6">
+              <Link
+                to="/signup"
+                state={{ direction: 1 }}
+                className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-full px-10 text-xl font-black text-white shadow-[0_16px_35px_rgba(33,143,185,0.32)]"
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-[var(--home-accent)] to-[var(--home-accent-2)] transition-transform duration-500 group-hover:scale-105" />
+                <span className="relative">ابدأ متجرك الآن</span>
+              </Link>
+            </div>
+          </MotionDiv>
+        </div>
       </div>
     </section>
   )

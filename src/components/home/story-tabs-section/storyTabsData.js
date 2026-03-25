@@ -2,7 +2,6 @@
   {
     key: 'vision',
     label: 'الرؤية',
-    chip: 'من نحن',
     titleLead: 'شريكك في النجاح',
     titleAccent: 'النمو الرقمي',
     description:
@@ -15,7 +14,6 @@
   {
     key: 'message',
     label: 'الرسالة',
-    chip: 'رسالتنا',
     titleLead: 'نصنع حلولًا',
     titleAccent: 'تحدث فرقًا',
     description:
@@ -28,7 +26,6 @@
   {
     key: 'expertise',
     label: 'الخبرات',
-    chip: 'خبراتنا',
     titleLead: 'فريق بخبرة',
     titleAccent: 'تتجاوز التوقعات',
     description:

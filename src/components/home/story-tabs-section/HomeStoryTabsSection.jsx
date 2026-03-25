@@ -1,4 +1,4 @@
-﻿import { TAB_ITEMS } from './storyTabsData'
+import { TAB_ITEMS } from './storyTabsData'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useMemo, useState } from 'react'
 import { FaCircleCheck } from 'react-icons/fa6'
@@ -15,8 +15,8 @@ function HomeStoryTabsSection() {
   const activeItem = useMemo(() => TAB_ITEMS.find((item) => item.key === activeKey) ?? TAB_ITEMS[0], [activeKey])
 
   return (
-    <section id="about" className="w-full pb-20">
-      <div className="relative w-full overflow-hidden rounded-none border-y border-[var(--home-story-border)] [background:var(--home-story-bg)] p-5 md:rounded-[34px] md:border md:p-8">
+    <section id="about" className="w-full pb-20 md:pb-24">
+      <div className="relative w-full overflow-hidden rounded-none border-y border-[var(--home-story-border)] [background:var(--home-story-bg)] p-5 md:border md:p-6">
         <MotionSpan
           aria-hidden
           animate={{ x: [0, 26, 0], y: [0, -18, 0], opacity: [0.35, 0.65, 0.35] }}
@@ -30,7 +30,7 @@ function HomeStoryTabsSection() {
           className="pointer-events-none absolute -bottom-24 right-[-72px] h-64 w-64 rounded-full [background:var(--home-story-glow)] blur-3xl"
         />
 
-        <div className="relative z-10 grid items-center gap-7 lg:grid-cols-[1.05fr_0.95fr]" dir="ltr">
+        <div className="relative z-10 grid items-center gap-6 lg:grid-cols-[1.05fr_0.95fr]" dir="ltr">
           <div dir="rtl">
             <AnimatePresence mode="wait">
               <MotionDiv
@@ -40,17 +40,13 @@ function HomeStoryTabsSection() {
                 exit={{ opacity: 0, y: -20, x: 26, filter: 'blur(6px)' }}
                 transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
               >
-                <span className="inline-flex rounded-full border border-[var(--home-story-border)] bg-[var(--home-story-tab-bg)] px-4 py-1 text-sm font-bold text-[var(--home-story-accent)]">
-                  {activeItem.chip}
-                </span>
-
-                <h2 className="mt-4 text-[clamp(2rem,4.6vw,5.2rem)] font-black leading-tight text-[var(--home-story-title)]">
+                <h2 className="text-[clamp(1.55rem,3.4vw,3.05rem)] font-black leading-tight text-[var(--home-story-title)]">
                   {activeItem.titleLead}
                   <br />
                   <span className="text-[var(--home-story-accent)]">{activeItem.titleAccent}</span>
                 </h2>
 
-                <div className="mt-5 flex flex-wrap gap-3">
+                <div className="mt-4 flex flex-wrap gap-3">
                   {TAB_ITEMS.map((item) => {
                     const isActive = item.key === activeKey
                     return (
@@ -80,7 +76,7 @@ function HomeStoryTabsSection() {
                   })}
                 </div>
 
-                <p className="mt-6 max-w-2xl text-right text-lg leading-relaxed text-[var(--home-story-text)] md:text-[1.7rem]">
+                <p className="mt-4 max-w-2xl text-right text-sm leading-relaxed text-[var(--home-story-text)] md:text-[1.05rem]">
                   {activeItem.description}
                 </p>
 
@@ -93,7 +89,7 @@ function HomeStoryTabsSection() {
                       transition: { staggerChildren: 0.08, delayChildren: 0.1 },
                     },
                   }}
-                  className="mt-6 grid gap-3 text-right sm:grid-cols-2"
+                  className="mt-5 grid gap-3 text-right sm:grid-cols-2"
                 >
                   {activeItem.points.map((point) => (
                     <MotionListItem
@@ -102,7 +98,7 @@ function HomeStoryTabsSection() {
                         hidden: { opacity: 0, y: 14 },
                         show: { opacity: 1, y: 0 },
                       }}
-                      className="inline-flex items-center justify-end gap-2 text-lg font-semibold text-[var(--home-story-muted)]"
+                      className="inline-flex flex-row-reverse items-center justify-end gap-2 text-sm font-semibold text-[var(--home-story-muted)] md:text-base"
                     >
                       <span>{point}</span>
                       <FaCircleCheck className="text-[var(--home-story-accent)]" />

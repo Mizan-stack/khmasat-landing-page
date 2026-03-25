@@ -41,9 +41,9 @@ function HomeClientControlSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55 }}
-      className="w-full pb-28"
+      className="w-full pb-20 md:pb-24"
     >
-      <div className="relative overflow-hidden border-y border-[var(--home-mobile-border)] [background:var(--home-mobile-bg)] py-14 md:py-18">
+      <div className="relative overflow-hidden border-y border-[var(--home-mobile-border)] [background:var(--home-mobile-bg)] py-10 md:py-12">
         <MotionSpan
           aria-hidden
           animate={{ x: [0, 30, 0], y: [0, -20, 0], opacity: [0.22, 0.5, 0.22] }}
@@ -58,7 +58,7 @@ function HomeClientControlSection() {
         />
 
         <div className="relative z-10 mx-auto w-full max-w-[1320px] px-3 md:px-6">
-          <div className="grid items-center gap-8 lg:grid-cols-[400px_1fr]" dir="ltr">
+          <div className="grid items-center gap-6 md:gap-7 lg:grid-cols-[400px_1fr]" dir="ltr">
             <div className="mx-auto w-full max-w-[360px]">
               <div className="relative h-[720px] rounded-[48px] border border-[var(--home-mobile-phone-border)] bg-[var(--home-mobile-phone-body)] p-2.5 shadow-[0_30px_55px_rgba(8,18,36,0.42)] md:h-[780px]">
                 <span className="absolute left-1/2 top-4 h-8 w-36 -translate-x-1/2 rounded-full bg-[var(--home-mobile-notch)]" />
@@ -66,7 +66,7 @@ function HomeClientControlSection() {
                 <div className="flex h-full flex-col overflow-hidden rounded-[38px] border border-[var(--home-mobile-screen-border)] bg-[var(--home-mobile-screen-bg)] px-4 pb-4 pt-11">
                   <div className="text-right">
                     <p className="text-sm font-semibold text-[var(--home-mobile-screen-muted)]">مشاريعي</p>
-                    <h3 className="text-[1.75rem] font-black text-[var(--home-mobile-screen-title)]">الخدمات النشطة</h3>
+                    <h3 className="text-[1.25rem] font-black text-[var(--home-mobile-screen-title)]">الخدمات النشطة</h3>
                   </div>
 
                   <MotionDiv key={sequenceId} className="mt-4 grid grid-cols-2 gap-3 [perspective:1000px]">
@@ -117,11 +117,10 @@ function HomeClientControlSection() {
               dir="rtl"
               className="text-right"
             >
-              <p className="text-[clamp(1.4rem,2.3vw,2.3rem)] font-black text-[var(--home-mobile-accent)]">لوحة تحكم العميل</p>
-              <h2 className="mt-2 text-[clamp(2.2rem,5vw,5.3rem)] font-black leading-tight text-[var(--home-mobile-title)]">
+              <h2 className="text-[clamp(1.65rem,3.6vw,3.2rem)] font-black leading-tight text-[var(--home-mobile-title)]">
                 تحكم في أصولك الرقمية
               </h2>
-              <p className="mt-5 max-w-4xl text-[clamp(1.2rem,1.8vw,2.1rem)] leading-relaxed text-[var(--home-mobile-text)]">
+              <p className="mt-4 max-w-4xl text-[clamp(0.95rem,1.15vw,1.15rem)] leading-relaxed text-[var(--home-mobile-text)]">
                 مكان واحد لإدارة طلبات الخدمة الخاصة بك، وعرض التقدم، والوصول إلى الدعم بسرعة.
               </p>
             </motion.div>

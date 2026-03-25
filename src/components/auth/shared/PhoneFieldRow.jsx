@@ -3,7 +3,7 @@ import { inputClass } from './inputClass'
 
 function PhoneFieldRow({ value, onChange, onBlur, placeholder, error, countryIso, onChangeCountry }) {
   return (
-    <div className="flex flex-col-reverse gap-3 md:flex-row md:items-start">
+    <div className="flex flex-col-reverse gap-2.5 md:flex-row md:items-start">
       <input
         type="tel"
         inputMode="numeric"
