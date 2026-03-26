@@ -61,9 +61,9 @@ function HomePlatformFeaturesSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55 }}
-      className="w-full pb-20 md:pb-24"
+      className="w-full pb-14 md:pb-24"
     >
-      <div className="relative overflow-hidden border-y border-[var(--home-power-border)] [background:var(--home-power-bg)] py-10 md:py-12">
+      <div className="relative overflow-hidden border-y border-[var(--home-power-border)] [background:var(--home-power-bg)] py-8 md:py-12">
         <MotionSpan
           aria-hidden
           animate={{ x: [0, 36, 0], y: [0, -24, 0], opacity: [0.25, 0.65, 0.25] }}
@@ -87,7 +87,43 @@ function HomePlatformFeaturesSection() {
             </p>
           </div>
 
-          <div className="mt-8 grid items-start gap-6 md:mt-10 lg:grid-cols-[minmax(0,1fr)_340px]" dir="ltr">
+          <div className="mt-8 space-y-4 md:hidden">
+            <FeatureSideList features={PLATFORM_FEATURES} activeKey={activeKey} onChange={setActiveKey} mobile />
+
+            <MotionDiv className="relative overflow-hidden rounded-[30px] border border-[var(--home-power-panel-border)] [background:var(--home-power-panel-bg)] p-4">
+              <AnimatePresence mode="wait">
+                <MotionDiv
+                  key={activeItem.key}
+                  initial={{
+                    opacity: 0,
+                    clipPath: 'inset(12% 8% 12% 8% round 28px)',
+                    rotateX: 12,
+                    y: 34,
+                    filter: 'blur(8px)',
+                  }}
+                  animate={{
+                    opacity: 1,
+                    clipPath: 'inset(0% 0% 0% 0% round 0px)',
+                    rotateX: 0,
+                    y: 0,
+                    filter: 'blur(0px)',
+                  }}
+                  exit={{
+                    opacity: 0,
+                    clipPath: 'inset(14% 10% 14% 10% round 28px)',
+                    rotateX: -9,
+                    y: -26,
+                    filter: 'blur(7px)',
+                  }}
+                  transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <FeaturePreviewPanel item={activeItem} />
+                </MotionDiv>
+              </AnimatePresence>
+            </MotionDiv>
+          </div>
+
+          <div className="mt-8 hidden items-start gap-6 md:grid md:mt-10 lg:grid-cols-[minmax(0,1fr)_340px]" dir="ltr">
             <MotionDiv
               ref={previewRef}
               initial={false}

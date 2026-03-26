@@ -41,9 +41,9 @@ function HomeClientControlSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55 }}
-      className="w-full pb-20 md:pb-24"
+      className="w-full pb-14 md:pb-24"
     >
-      <div className="relative overflow-hidden border-y border-[var(--home-mobile-border)] [background:var(--home-mobile-bg)] py-10 md:py-12">
+      <div className="relative overflow-hidden border-y border-[var(--home-mobile-border)] [background:var(--home-mobile-bg)] py-8 md:py-12">
         <MotionSpan
           aria-hidden
           animate={{ x: [0, 30, 0], y: [0, -20, 0], opacity: [0.22, 0.5, 0.22] }}

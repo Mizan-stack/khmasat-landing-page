@@ -8,7 +8,7 @@ import { useCountryFilter } from './useCountryFilter'
 
 const MotionDiv = motion.div
 
-function CountrySelect({ value, onChange, error }) {
+function CountrySelect({ value, onChange, error, className = '', dropdownClassName = '' }) {
   const [isOpen, setIsOpen] = useState(false)
   const [query, setQuery] = useState('')
   const containerRef = useRef(null)
@@ -43,21 +43,21 @@ function CountrySelect({ value, onChange, error }) {
   }
 
   return (
-    <div className="relative w-full md:w-64" ref={containerRef}>
+    <div className={`relative w-full md:w-72 ${className}`} ref={containerRef}>
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`group flex h-11 w-full items-center justify-between rounded-2xl border px-3 text-right transition-all duration-300 ${
+        className={`group flex h-12 w-full items-center justify-between rounded-2xl border px-4 text-right transition-all duration-300 ${
           error
             ? 'border-red-400/80 bg-red-500/10 text-red-100'
             : 'border-[var(--border-soft)] bg-[var(--surface-soft)] text-[var(--right-text-primary)] hover:border-[var(--accent)]'
         }`}
       >
-        <span className="flex items-center gap-2">
+        <span className="flex min-w-0 items-center gap-2.5">
           <FlagIcon isoCode={selectedCountry.isoCode} />
-          <span className="text-xs font-bold md:text-sm">{selectedCountry.name}</span>
+          <span className="truncate text-xs font-bold md:text-sm">{selectedCountry.name}</span>
         </span>
-        <span className="flex items-center gap-2">
+        <span className="flex shrink-0 items-center gap-2">
           <span className="text-xs font-extrabold text-[var(--accent)] md:text-sm">{selectedCountry.dialCode}</span>
           <span
             className={`text-xs text-[var(--text-muted)] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
@@ -74,7 +74,7 @@ function CountrySelect({ value, onChange, error }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.22, ease: 'easeOut' }}
-            className="absolute right-0 z-20 mt-2 w-full overflow-hidden rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-panel)] shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-md"
+            className={`absolute right-0 z-20 mt-2 w-full overflow-hidden rounded-2xl border border-[var(--border-strong)] bg-[var(--surface-panel)] shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-md md:w-[19rem] ${dropdownClassName}`}
           >
             <div className="p-2.5">
               <input

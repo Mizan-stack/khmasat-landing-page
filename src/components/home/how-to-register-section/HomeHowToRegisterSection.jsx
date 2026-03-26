@@ -14,9 +14,9 @@ function HomeHowToRegisterSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55 }}
-      className="mx-auto w-full max-w-[1320px] px-3 pb-20 md:px-6 md:pb-24"
+      className="mx-auto w-full max-w-[1320px] px-3 pb-14 md:px-6 md:pb-24"
     >
-      <div className="relative overflow-hidden rounded-[34px] border border-[var(--home-steps-border)] [background:var(--home-steps-bg)] px-4 py-9 md:px-7 md:py-11">
+      <div className="relative overflow-hidden rounded-[34px] border border-[var(--home-steps-border)] [background:var(--home-steps-bg)] px-4 py-7 md:px-7 md:py-11">
         <MotionSpan
           aria-hidden
           animate={{ x: [0, 36, 0], y: [0, -18, 0], opacity: [0.16, 0.38, 0.16] }}
@@ -40,7 +40,7 @@ function HomeHowToRegisterSection() {
             </p>
           </div>
 
-          <div className="mt-7 grid gap-7 md:mt-8 md:grid-cols-4" dir="rtl">
+          <div className="mt-7 grid grid-cols-2 gap-5 md:mt-8 md:grid-cols-4 md:gap-7" dir="rtl">
             {REGISTER_STEPS.map((step, index) => {
               const Icon = step.icon
               const isCelebration = step.celebration

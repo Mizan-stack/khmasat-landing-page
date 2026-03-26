@@ -21,9 +21,9 @@ function HomeFaqSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55 }}
-      className="w-full py-16 md:py-20"
+      className="w-full py-12 md:py-20"
     >
-      <div className="relative w-full overflow-hidden border-y border-[var(--home-faq-border)] [background:var(--home-faq-bg)] py-10 md:py-12">
+      <div className="relative w-full overflow-hidden border-y border-[var(--home-faq-border)] [background:var(--home-faq-bg)] py-8 md:py-12">
         <MotionSpan
           aria-hidden
           animate={{ x: [0, 38, 0], y: [0, -26, 0], opacity: [0.2, 0.45, 0.2] }}

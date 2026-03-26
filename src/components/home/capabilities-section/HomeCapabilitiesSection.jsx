@@ -15,7 +15,7 @@ function HomeCapabilitiesSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55 }}
-      className="mx-auto w-full max-w-[1320px] px-3 pb-20 md:px-6 md:pb-24"
+      className="mx-auto w-full max-w-[1320px] px-3 pb-14 md:px-6 md:pb-24"
     >
       <div className="relative overflow-hidden rounded-[32px] border border-[var(--home-card-border)] bg-[var(--home-card-bg)] p-5 md:p-6">
         <motion.span

@@ -40,7 +40,7 @@ function HomeFooterSection() {
           className="pointer-events-none absolute -bottom-20 right-[-100px] h-80 w-80 rounded-full [background:var(--home-footer-glow)] blur-3xl"
         />
 
-        <div className="relative z-10 w-full px-4 pb-7 pt-14 md:px-8 md:pt-16 lg:px-12">
+        <div className="relative z-10 w-full px-4 pb-7 pt-10 md:px-8 md:pt-16 lg:px-12">
           <div className="grid gap-10 lg:grid-cols-[1fr_0.85fr_1.1fr]" dir="rtl">
             <motion.div
               initial={{ opacity: 0, x: 34, filter: 'blur(7px)' }}
@@ -65,7 +65,7 @@ function HomeFooterSection() {
               className="text-right"
             >
               <h4 className="text-[clamp(1.25rem,1.9vw,2rem)] font-black text-[var(--home-footer-title)]">{FOOTER_CONTENT.linksTitle}</h4>
-              <ul className="mt-4 space-y-2">
+              <ul className="mt-4 grid grid-cols-2 justify-items-start gap-x-6 gap-y-2">
                 {FOOTER_LINKS.map((link) => (
                   <li key={link.label}>
                     <a

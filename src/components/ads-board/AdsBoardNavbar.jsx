@@ -1,12 +1,13 @@
-import { motion } from 'framer-motion'
-import { useEffect, useMemo, useState } from 'react'
-import { FaCalendarDays, FaClock, FaGlobe, FaMoon, FaSun } from 'react-icons/fa6'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { FaBars, FaCalendarDays, FaClock, FaGlobe, FaMoon, FaSun, FaXmark } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
 import { useTheme } from '../../app/providers/useTheme'
 
 const MotionHeader = motion.header
 const MotionButton = motion.button
 const MotionSpan = motion.span
+const MotionDiv = motion.div
 
 const THEME_OPTIONS = [
   { value: 'dark', label: 'الوضع الليلي', icon: FaMoon, rotate: -12 },
@@ -100,14 +101,14 @@ function DashboardLanguageButton() {
   )
 }
 
-function DashboardUserBadge({ user }) {
+function DashboardUserBadge({ user, className = '' }) {
   const displayName = user?.displayName || 'حساب المعلن'
   const avatarLabel = user?.avatarLabel || 'BA'
 
   return (
     <motion.div
       whileHover={{ y: -2 }}
-      className="inline-flex items-center gap-3 rounded-[22px] border border-[var(--ads-nav-soft-border)] bg-[var(--ads-nav-soft-bg)] px-3 py-2.5 text-right shadow-[0_12px_24px_rgba(18,34,62,0.08)]"
+      className={`inline-flex items-center gap-3 rounded-[22px] border border-[var(--ads-nav-soft-border)] bg-[var(--ads-nav-soft-bg)] px-3 py-2.5 text-right shadow-[0_12px_24px_rgba(18,34,62,0.08)] ${className}`}
     >
       <div className="min-w-0">
         <p className="truncate text-sm font-black text-[var(--ads-text)] md:max-w-[180px]">{displayName}</p>
@@ -134,11 +135,11 @@ function BrandBlock() {
   )
 }
 
-function DateTimeBadge({ now }) {
+function DateTimeBadge({ now, stacked = false }) {
   const { timeLabel, meridiemLabel, dateLabel } = useMemo(() => formatDateTime(now), [now])
 
   return (
-    <div className="flex flex-wrap items-center gap-2 md:gap-3">
+    <div className={`flex gap-2 md:gap-3 ${stacked ? 'flex-col items-stretch' : 'flex-wrap items-center'}`}>
       <motion.div
         whileHover={{ y: -2 }}
         className="inline-flex h-14 items-center gap-2 rounded-2xl border border-[var(--ads-nav-soft-border)] bg-[var(--ads-nav-soft-bg)] px-3 text-[var(--ads-text)] shadow-[0_12px_24px_rgba(18,34,62,0.08)]"
@@ -172,17 +173,91 @@ function DateTimeBadge({ now }) {
   )
 }
 
+function MobileMenuButton({ isOpen, onClick }) {
+  return (
+    <MotionButton
+      type="button"
+      whileTap={{ scale: 0.96 }}
+      onClick={onClick}
+      className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--ads-nav-soft-border)] bg-[var(--ads-nav-soft-bg)] text-[1.05rem] text-[var(--ads-text)] shadow-[0_12px_24px_rgba(18,34,62,0.08)]"
+      aria-label={isOpen ? 'إغلاق القائمة' : 'فتح القائمة'}
+      title={isOpen ? 'إغلاق القائمة' : 'فتح القائمة'}
+    >
+      {isOpen ? <FaXmark /> : <FaBars />}
+    </MotionButton>
+  )
+}
+
+function MobileMenuPanel({ now, user }) {
+  return (
+    <MotionDiv
+      initial={{ opacity: 0, height: 0, y: -6 }}
+      animate={{ opacity: 1, height: 'auto', y: 0 }}
+      exit={{ opacity: 0, height: 0, y: -6 }}
+      transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+      className="overflow-hidden md:hidden"
+    >
+      <div className="mt-4 space-y-3 border-t border-[var(--ads-nav-soft-border)] pt-4">
+        <DateTimeBadge now={now} stacked />
+
+        <div className="flex flex-wrap items-center gap-2">
+          <DashboardThemeToggle />
+          <DashboardLanguageButton />
+        </div>
+
+        <DashboardUserBadge user={user} className="w-full justify-between" />
+      </div>
+    </MotionDiv>
+  )
+}
+
 function AdsBoardNavbar({ user }) {
   const [now, setNow] = useState(() => new Date())
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const navbarRef = useRef(null)
 
   useEffect(() => {
     const intervalId = window.setInterval(() => setNow(new Date()), 1000)
     return () => window.clearInterval(intervalId)
   }, [])
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return undefined
+
+    function handleOutsideClick(event) {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    function handleEscape(event) {
+      if (event.key === 'Escape') setIsMobileMenuOpen(false)
+    }
+
+    document.addEventListener('mousedown', handleOutsideClick)
+    window.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+      window.removeEventListener('keydown', handleEscape)
+    }
+  }, [isMobileMenuOpen])
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth >= 768) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   return (
     <header className="sticky top-2 z-40 px-3 md:px-6">
       <MotionHeader
+        ref={navbarRef}
         initial={{ opacity: 0, y: -18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
@@ -190,7 +265,16 @@ function AdsBoardNavbar({ user }) {
         style={{ boxShadow: '0 18px 44px var(--ads-nav-shadow)' }}
         className="mx-auto w-full max-w-[1320px] rounded-[26px] border border-[var(--ads-nav-border)] bg-[var(--ads-nav-bg)] px-4 py-3 backdrop-blur-xl md:px-6"
       >
-        <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
+        <div className="flex items-center justify-between md:hidden">
+          <BrandBlock />
+          <MobileMenuButton isOpen={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen((prev) => !prev)} />
+        </div>
+
+        <AnimatePresence initial={false}>
+          {isMobileMenuOpen ? <MobileMenuPanel now={now} user={user} /> : null}
+        </AnimatePresence>
+
+        <div className="hidden gap-4 md:flex md:flex-col xl:flex-row xl:items-center xl:justify-between">
           <div className="flex flex-col gap-3 xl:flex-row xl:items-center">
             <BrandBlock />
             <DateTimeBadge now={now} />

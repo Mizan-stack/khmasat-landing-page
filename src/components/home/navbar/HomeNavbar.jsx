@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { FaGlobe } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { useTheme } from '../../../app/providers/useTheme'
+import HomeSocialLinks from '../top-bar/HomeSocialLinks'
 import HomeThemeToggle from '../theme-toggle/HomeThemeToggle'
 
 const MotionNav = motion.nav
@@ -52,6 +54,7 @@ function LanguageBadge() {
 }
 
 function HomeNavbar() {
+  const { isDark } = useTheme()
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -140,6 +143,11 @@ function HomeNavbar() {
               <div className="mb-3 flex items-center justify-between gap-3 rounded-2xl bg-[var(--home-surface-soft)] p-2">
                 <HomeThemeToggle />
                 <LanguageBadge />
+              </div>
+
+              <div className="mb-3 md:hidden">
+                <p className="mb-3 text-center text-sm font-bold text-[var(--home-text-primary)] opacity-75">تابعنا على منصاتنا</p>
+                <HomeSocialLinks isDark={isDark} mobileMenu />
               </div>
 
               {NAV_LINKS.map((link) => (

@@ -44,15 +44,20 @@ function AddAdModal({ isOpen, onClose }) {
     step,
     direction,
     planCycle,
-    planOptions,
     selectedPlan,
     selectedPlanKey,
     businessForm,
     paymentForm,
+    paymentSummary,
+    appliedCoupon,
+    couponFeedback,
     businessErrors,
     paymentErrors,
     businessTouched,
     paymentTouched,
+    fileUploadProgress,
+    fileUploadLoading,
+    selectedPhoneCountry,
     isPaying,
     paymentSuccessOpen,
     setPlanCycle,
@@ -62,6 +67,8 @@ function AddAdModal({ isOpen, onClose }) {
     markBusinessTouched,
     markPaymentTouched,
     changePhoneCountry,
+    applyCoupon,
+    removeCoupon,
     continueFromPlans,
     continueFromBusiness,
     goBack,
@@ -89,12 +96,13 @@ function AddAdModal({ isOpen, onClose }) {
     submitPayment(onClose)
   }
 
+  const panelWidthClass = step === 1 ? 'max-w-[1400px]' : step === 3 ? 'max-w-[1500px]' : 'max-w-5xl'
+
   function renderStep() {
     if (step === 1) {
       return (
         <PlanStep
           planCycle={planCycle}
-          planOptions={planOptions}
           selectedPlanKey={selectedPlanKey}
           onCycleChange={setPlanCycle}
           onSelectPlan={setSelectedPlanKey}
@@ -109,6 +117,8 @@ function AddAdModal({ isOpen, onClose }) {
           form={businessForm}
           errors={businessErrors}
           touched={businessTouched}
+          fileUploadProgress={fileUploadProgress}
+          fileUploadLoading={fileUploadLoading}
           onFieldChange={updateBusinessField}
           onFieldBlur={markBusinessTouched}
           onPhoneCountryChange={changePhoneCountry}
@@ -121,12 +131,19 @@ function AddAdModal({ isOpen, onClose }) {
     return (
       <PaymentStep
         plan={selectedPlan}
+        businessForm={businessForm}
         form={paymentForm}
+        paymentSummary={paymentSummary}
+        appliedCoupon={appliedCoupon}
+        couponFeedback={couponFeedback}
         errors={paymentErrors}
         touched={paymentTouched}
         isPaying={isPaying}
+        selectedPhoneCountry={selectedPhoneCountry}
         onFieldChange={updatePaymentField}
         onFieldBlur={markPaymentTouched}
+        onApplyCoupon={applyCoupon}
+        onRemoveCoupon={removeCoupon}
         onBack={goBack}
         onPay={completePayment}
       />
@@ -157,7 +174,7 @@ function AddAdModal({ isOpen, onClose }) {
             exit={{ opacity: 0, y: 24, scale: 0.95 }}
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             onClick={(event) => event.stopPropagation()}
-            className="pointer-events-auto relative z-10 flex w-full max-w-5xl flex-col overflow-hidden rounded-[30px] border bg-[var(--ads-surface)] p-4 shadow-[0_30px_70px_rgba(4,13,31,0.42)] max-h-[94dvh] md:max-h-[92dvh] md:p-6"
+            className={`pointer-events-auto relative z-10 flex w-full ${panelWidthClass} flex-col overflow-hidden rounded-[30px] border bg-[var(--ads-surface)] p-4 shadow-[0_30px_70px_rgba(4,13,31,0.42)] max-h-[94dvh] md:max-h-[92dvh] md:p-6`}
             style={modalPanelStyle}
             dir="rtl"
           >
@@ -172,7 +189,9 @@ function AddAdModal({ isOpen, onClose }) {
             <div className="mb-5 text-right">
               <h2 className="text-[clamp(1.5rem,2.8vw,2.2rem)] font-black text-[var(--ads-text)]">إضافة إعلان جديد</h2>
               <p className="mt-1 text-sm text-[var(--ads-muted)]">
-                {WIZARD_STEPS.find((wizardStep) => wizardStep.key === step)?.title}
+                {step === 1
+                  ? 'اختر الاشتراك المناسب أولًا بكل تفاصيله ثم أكمل بيانات الإعلان والدفع.'
+                  : WIZARD_STEPS.find((wizardStep) => wizardStep.key === step)?.title}
               </p>
             </div>
 
@@ -186,9 +205,9 @@ function AddAdModal({ isOpen, onClose }) {
                     key={wizardStep.key}
                     className={`rounded-xl border px-3 py-2 text-center text-xs font-black transition-colors md:text-sm ${
                       isActive
-                        ? 'border-cyan-300 bg-cyan-500/15 text-cyan-700 dark:text-cyan-300'
+                        ? 'border-[var(--ads-selected-soft-border)] bg-[var(--ads-selected-soft-bg)] text-[var(--ads-selected-soft-text)]'
                         : isDone
-                          ? 'border-emerald-300/50 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300'
+                          ? 'border-[var(--ads-success-soft-border)] bg-[var(--ads-success-soft-bg)] text-[var(--ads-success-soft-text)]'
                           : 'border-[var(--ads-border-soft)] bg-[var(--ads-surface-soft)] text-[var(--ads-muted)]'
                     }`}
                   >

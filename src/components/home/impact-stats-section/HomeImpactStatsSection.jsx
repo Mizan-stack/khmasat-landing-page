@@ -62,8 +62,8 @@ function ImpactCard({ card, index }) {
       }}
       viewport={{ once: true, amount: 0.22 }}
       transition={{ duration: 0.46, delay: card.delay, ease: [0.22, 1, 0.36, 1] }}
-      className={`group relative flex flex-col overflow-hidden rounded-[26px] border border-[var(--home-impact-card-border)] [background:var(--home-impact-card-bg)] p-5 text-right md:p-6 ${
-        isLarge ? 'min-h-[224px]' : 'min-h-[176px]'
+      className={`group relative flex flex-col overflow-hidden rounded-[26px] border border-[var(--home-impact-card-border)] [background:var(--home-impact-card-bg)] p-4 text-right md:p-6 ${
+        isLarge ? 'min-h-[196px] md:min-h-[224px]' : 'min-h-[154px] md:min-h-[176px]'
       }`}
       dir="rtl"
     >
@@ -81,12 +81,12 @@ function ImpactCard({ card, index }) {
         className="pointer-events-none absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-cyan-300/18 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
       />
 
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex items-start justify-between gap-2.5 md:gap-3">
         <div className="max-w-[75%]">
           <h3 className="text-[clamp(1.05rem,1.35vw,1.34rem)] font-black leading-[1.15] text-[var(--home-impact-card-title)]">
             {card.title}
           </h3>
-          <p className="mt-3 text-[clamp(0.88rem,0.98vw,0.96rem)] font-semibold leading-relaxed text-[var(--home-impact-card-text)]">
+          <p className="mt-2 text-[clamp(0.88rem,0.98vw,0.96rem)] font-semibold leading-relaxed text-[var(--home-impact-card-text)] md:mt-3">
             {card.description}
           </p>
         </div>
@@ -94,16 +94,16 @@ function ImpactCard({ card, index }) {
           animate={{ y: [0, -3, 0], rotate: [0, 4, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: card.floatDelay }}
           className={`inline-flex shrink-0 items-center justify-center rounded-2xl border border-[var(--home-impact-icon-border)] bg-[var(--home-impact-icon-bg)] text-[var(--home-impact-icon)] ${
-            isLarge ? 'h-14 w-14 text-3xl' : 'h-12 w-12 text-[1.65rem]'
+            isLarge ? 'h-12 w-12 text-[1.65rem] md:h-14 md:w-14 md:text-3xl' : 'h-11 w-11 text-[1.45rem] md:h-12 md:w-12 md:text-[1.65rem]'
           }`}
         >
           <Icon />
         </motion.span>
       </div>
 
-      <div className="mt-auto pt-5">
-        <div className="mb-4 h-px w-full bg-[linear-gradient(90deg,rgba(57,188,188,0),rgba(57,188,188,0.24),rgba(57,188,188,0))]" />
-        <div className="flex items-end justify-end gap-1.5">
+      <div className="mt-auto pt-3 md:pt-5">
+        <div className="mb-3 h-px w-full bg-[linear-gradient(90deg,rgba(57,188,188,0),rgba(57,188,188,0.24),rgba(57,188,188,0))] md:mb-4" />
+        <div className="flex items-end justify-end gap-1">
         <motion.span
           animate={{ scale: [1, 1.07, 1], opacity: [0.8, 1, 0.8] }}
           transition={{ duration: 1.7, repeat: Infinity, ease: 'easeInOut', delay: card.floatDelay }}
@@ -132,9 +132,9 @@ function HomeImpactStatsSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55 }}
-      className="w-full pb-20 md:pb-24"
+      className="w-full pb-14 md:pb-24"
     >
-      <div className="relative overflow-hidden py-10 md:py-12">
+      <div className="relative overflow-hidden py-8 md:py-12">
         <div className="relative z-10 mx-auto w-full max-w-[1320px] px-3 md:px-6">
           <div className="grid items-center gap-6 md:gap-7 lg:grid-cols-[1fr_0.95fr]" dir="ltr">
             <div className="grid gap-3.5 sm:grid-cols-2 md:gap-4">

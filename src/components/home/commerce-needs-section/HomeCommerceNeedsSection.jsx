@@ -13,9 +13,9 @@ function HomeCommerceNeedsSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.55 }}
-      className="mx-auto w-full max-w-[1320px] px-3 pb-20 md:px-6 md:pb-24"
+      className="mx-auto w-full max-w-[1320px] px-3 pb-14 md:px-6 md:pb-24"
     >
-      <div className="relative overflow-hidden rounded-[34px] border border-[var(--home-needs-border)] [background:var(--home-needs-bg)] px-4 py-8 md:px-7 md:py-10">
+      <div className="relative overflow-hidden rounded-[34px] border border-[var(--home-needs-border)] [background:var(--home-needs-bg)] px-4 py-6 md:px-7 md:py-10">
         {Array.from({ length: 8 }).map((_, ringIndex) => (
           <MotionSpan
             key={ringIndex}

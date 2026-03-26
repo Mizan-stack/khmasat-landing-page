@@ -1,4 +1,5 @@
-﻿import { motion } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { useTheme } from '../../../app/providers/useTheme'
 import { PhoneFieldRow } from '../../auth/shared'
 import {
   BUSINESS_ACTIVITY_OPTIONS,
@@ -6,10 +7,15 @@ import {
   PLATFORM_OPTIONS,
   REGISTRATION_TYPES,
 } from './addAdModalData'
+import RegistrationDatePicker from './RegistrationDatePicker'
 import StepField from './StepField'
 
 const MotionSpan = motion.span
 const MotionButton = motion.button
+const SELECT_OPTION_STYLE = {
+  backgroundColor: 'var(--ads-dropdown-bg)',
+  color: 'var(--ads-text)',
+}
 
 function fieldClass(hasError) {
   return `h-12 w-full rounded-2xl border px-4 text-base text-[var(--ads-text)] outline-none transition-all duration-300 placeholder:text-[var(--ads-muted)] ${
@@ -19,10 +25,87 @@ function fieldClass(hasError) {
   }`
 }
 
+function selectFieldClass(hasError) {
+  return `h-12 w-full rounded-2xl border px-4 text-base text-[var(--ads-text)] outline-none transition-all duration-300 ${
+    hasError
+      ? 'border-red-500 bg-[var(--ads-surface-soft)] shadow-[0_0_0_1px_rgba(239,68,68,0.18)]'
+      : 'border-[var(--ads-border-soft)] bg-[var(--ads-surface-soft)] focus:border-[var(--ads-dropdown-active-bg)]'
+  }`
+}
+
+function uploadShellClass(hasError) {
+  return `rounded-2xl border p-3 transition-colors ${
+    hasError
+      ? 'border-red-500 bg-red-500/10'
+      : 'border-[var(--ads-border-soft)] bg-[var(--ads-surface-soft)]'
+  }`
+}
+
+function UploadField({
+  label,
+  error,
+  touched,
+  file,
+  progress,
+  isUploading,
+  onChange,
+  onBlur,
+}) {
+  const currentError = touched ? error : ''
+  const statusText = currentError
+    ? 'تحقق من نوع الصورة أو حجمها'
+    : isUploading
+      ? 'جارٍ تحميل الصورة...'
+      : progress === 100
+        ? 'تم تحميل الصورة بنجاح'
+        : 'الصورة جاهزة للمتابعة'
+
+  return (
+    <StepField label={label} required error={currentError}>
+      <div className={uploadShellClass(currentError)}>
+        <input
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+          onChange={(event) => {
+            const selectedFile = event.target.files?.[0] ?? null
+            onChange(selectedFile)
+          }}
+          onBlur={onBlur}
+          className="block w-full text-sm text-[var(--ads-muted)] file:ms-3 file:rounded-xl file:border-0 file:bg-[var(--ads-button-primary-bg)] file:px-4 file:py-2 file:text-sm file:font-black file:text-[var(--ads-button-primary-text)]"
+        />
+
+        {file ? (
+          <div className="mt-3 space-y-2">
+            <div className="flex items-center justify-between gap-3">
+              <p className="truncate text-xs font-semibold text-[var(--ads-text)]">{file.name}</p>
+              <span className="shrink-0 text-xs font-black text-[var(--ads-button-ghost-text)]">{progress}%</span>
+            </div>
+
+            <div className="h-2 overflow-hidden rounded-full bg-[var(--ads-border-soft)]">
+              <motion.span
+                className="block h-full rounded-full [background:var(--ads-button-primary-bg)]"
+                initial={{ width: 0 }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.28, ease: 'easeOut' }}
+              />
+            </div>
+
+            <p className="text-[11px] font-semibold text-[var(--ads-muted)]">{statusText}</p>
+          </div>
+        ) : (
+          <p className="mt-2 text-[11px] font-semibold text-[var(--ads-muted)]">JPG / PNG / WEBP حتى 5MB</p>
+        )}
+      </div>
+    </StepField>
+  )
+}
+
 function BusinessInfoStep({
   form,
   errors,
   touched,
+  fileUploadProgress,
+  fileUploadLoading,
   onFieldChange,
   onFieldBlur,
   onPhoneCountryChange,
@@ -31,8 +114,8 @@ function BusinessInfoStep({
 }) {
   const isFreelance = form.registrationType === 'freelance'
   const phoneError = touched.phone ? errors.phone : ''
-  const adImageError = touched.adImage ? errors.adImage : ''
-  const selectedImageName = form.adImage ? form.adImage.name : ''
+  const { isDark } = useTheme()
+  const selectStyle = { colorScheme: isDark ? 'dark' : 'light' }
 
   return (
     <div className="space-y-5" dir="rtl">
@@ -40,8 +123,8 @@ function BusinessInfoStep({
         <h3 className="text-2xl font-black text-[var(--ads-text)]">املا البيانات التالية</h3>
         <p className="mt-1 text-sm text-[var(--ads-muted)]">
           {isFreelance
-            ? 'الرجاء إدخال بيانات العمل الحر الخاصة بك كما هو مطلوب.'
-            : 'الرجاء إدخال تفاصيل السجل التجاري أو العمل الحر الخاص بك.'}
+            ? 'أدخل بيانات وثيقة العمل الحر الخاصة بك، مع رقم الوثيقة وصورتها بشكل واضح.'
+            : 'أدخل بيانات السجل التجاري وبيانات النشاط والصور المطلوبة بدقة.'}
         </p>
       </div>
 
@@ -97,12 +180,11 @@ function BusinessInfoStep({
           </StepField>
         ) : (
           <StepField label="تاريخ التسجيل" required error={touched.registrationDate ? errors.registrationDate : ''}>
-            <input
-              type="date"
+            <RegistrationDatePicker
               value={form.registrationDate}
-              onChange={(event) => onFieldChange('registrationDate', event.target.value)}
+              error={touched.registrationDate ? errors.registrationDate : ''}
+              onChange={(nextValue) => onFieldChange('registrationDate', nextValue)}
               onBlur={() => onFieldBlur('registrationDate')}
-              className={fieldClass(touched.registrationDate && errors.registrationDate)}
             />
           </StepField>
         )}
@@ -114,11 +196,12 @@ function BusinessInfoStep({
             value={form.activity}
             onChange={(event) => onFieldChange('activity', event.target.value)}
             onBlur={() => onFieldBlur('activity')}
-            className={fieldClass(touched.activity && errors.activity)}
+            style={selectStyle}
+            className={selectFieldClass(touched.activity && errors.activity)}
           >
             <option value="">-- اختر --</option>
             {BUSINESS_ACTIVITY_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
+              <option key={option.value} value={option.value} style={SELECT_OPTION_STYLE}>
                 {option.label}
               </option>
             ))}
@@ -130,11 +213,12 @@ function BusinessInfoStep({
             value={form.countryIso}
             onChange={(event) => onFieldChange('countryIso', event.target.value)}
             onBlur={() => onFieldBlur('countryIso')}
-            className={fieldClass(touched.countryIso && errors.countryIso)}
+            style={selectStyle}
+            className={selectFieldClass(touched.countryIso && errors.countryIso)}
           >
             <option value="">-- اختر --</option>
             {BUSINESS_COUNTRY_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
+              <option key={option.value} value={option.value} style={SELECT_OPTION_STYLE}>
                 {option.label}
               </option>
             ))}
@@ -152,6 +236,9 @@ function BusinessInfoStep({
             error={phoneError}
             countryIso={form.phoneCountryIso}
             onChangeCountry={onPhoneCountryChange}
+            layoutClassName="md:grid md:grid-cols-[1fr_18rem] md:items-start"
+            countrySelectClassName="md:w-[18rem]"
+            countryDropdownClassName="md:w-[19rem]"
           />
         </StepField>
 
@@ -160,11 +247,12 @@ function BusinessInfoStep({
             value={form.platform}
             onChange={(event) => onFieldChange('platform', event.target.value)}
             onBlur={() => onFieldBlur('platform')}
-            className={fieldClass(touched.platform && errors.platform)}
+            style={selectStyle}
+            className={selectFieldClass(touched.platform && errors.platform)}
           >
             <option value="">-- اختر --</option>
             {PLATFORM_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
+              <option key={option.value} value={option.value} style={SELECT_OPTION_STYLE}>
                 {option.label}
               </option>
             ))}
@@ -173,52 +261,60 @@ function BusinessInfoStep({
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <StepField label="رابط المتجر" required error={touched.storeUrl ? errors.storeUrl : ''}>
+        <StepField
+          label={isFreelance ? 'رقم الوثيقة' : 'رابط المتجر'}
+          required
+          error={isFreelance ? (touched.documentNumber ? errors.documentNumber : '') : touched.storeUrl ? errors.storeUrl : ''}
+        >
           <input
-            type="url"
-            dir="ltr"
-            value={form.storeUrl}
-            onChange={(event) => onFieldChange('storeUrl', event.target.value)}
-            onBlur={() => onFieldBlur('storeUrl')}
-            placeholder="https://yourstore.com"
-            className={fieldClass(touched.storeUrl && errors.storeUrl)}
+            type={isFreelance ? 'text' : 'url'}
+            dir={isFreelance ? 'rtl' : 'ltr'}
+            value={isFreelance ? form.documentNumber : form.storeUrl}
+            onChange={(event) => onFieldChange(isFreelance ? 'documentNumber' : 'storeUrl', event.target.value)}
+            onBlur={() => onFieldBlur(isFreelance ? 'documentNumber' : 'storeUrl')}
+            placeholder={isFreelance ? 'أدخل رقم وثيقة العمل الحر' : 'https://yourstore.com'}
+            className={fieldClass(
+              isFreelance
+                ? touched.documentNumber && errors.documentNumber
+                : touched.storeUrl && errors.storeUrl,
+            )}
           />
         </StepField>
 
-        <StepField label="صورة الإعلان" required error={adImageError}>
-          <div
-            className={`rounded-2xl border p-3 transition-colors ${
-              adImageError
-                ? 'border-red-500 bg-red-500/10'
-                : 'border-[var(--ads-border-soft)] bg-[var(--ads-surface-soft)]'
-            }`}
-          >
-            <input
-              type="file"
-              accept="image/png,image/jpeg,image/webp"
-              onChange={(event) => {
-                const file = event.target.files?.[0] ?? null
-                onFieldChange('adImage', file)
-              }}
-              onBlur={() => onFieldBlur('adImage')}
-              className="block w-full text-sm text-[var(--ads-muted)] file:ms-3 file:rounded-xl file:border-0 file:bg-[var(--ads-button-primary-bg)] file:px-4 file:py-2 file:text-sm file:font-black file:text-[var(--ads-button-primary-text)]"
-            />
-            {selectedImageName ? (
-              <p className="mt-2 truncate text-xs font-semibold text-[var(--ads-text)]">{selectedImageName}</p>
-            ) : null}
-          </div>
-        </StepField>
+        <UploadField
+          label="صورة الإعلان"
+          error={errors.adImage}
+          touched={touched.adImage}
+          file={form.adImage}
+          progress={fileUploadProgress.adImage}
+          isUploading={fileUploadLoading.adImage}
+          onChange={(file) => onFieldChange('adImage', file)}
+          onBlur={() => onFieldBlur('adImage')}
+        />
       </div>
 
-      {!isFreelance ? (
+      {isFreelance ? (
         <div className="grid gap-4 md:grid-cols-2">
-          <StepField label="رقم الترخيص" required error={touched.licenseNumber ? errors.licenseNumber : ''}>
+          <UploadField
+            label="رفع صورة وثيقة العمل الحر"
+            error={errors.documentImage}
+            touched={touched.documentImage}
+            file={form.documentImage}
+            progress={fileUploadProgress.documentImage}
+            isUploading={fileUploadLoading.documentImage}
+            onChange={(file) => onFieldChange('documentImage', file)}
+            onBlur={() => onFieldBlur('documentImage')}
+          />
+        </div>
+      ) : (
+        <div className="grid gap-4 md:grid-cols-3">
+          <StepField label="رقم السجل التجاري" required error={touched.licenseNumber ? errors.licenseNumber : ''}>
             <input
               type="text"
               value={form.licenseNumber}
               onChange={(event) => onFieldChange('licenseNumber', event.target.value)}
               onBlur={() => onFieldBlur('licenseNumber')}
-              placeholder="رقم ترخيص السجل التجاري"
+              placeholder="أدخل رقم السجل التجاري"
               className={fieldClass(touched.licenseNumber && errors.licenseNumber)}
             />
           </StepField>
@@ -238,8 +334,19 @@ function BusinessInfoStep({
               className={fieldClass(touched.saudiStoreUrl && errors.saudiStoreUrl)}
             />
           </StepField>
+
+          <UploadField
+            label="رفع صورة السجل التجاري"
+            error={errors.documentImage}
+            touched={touched.documentImage}
+            file={form.documentImage}
+            progress={fileUploadProgress.documentImage}
+            isUploading={fileUploadLoading.documentImage}
+            onChange={(file) => onFieldChange('documentImage', file)}
+            onBlur={() => onFieldBlur('documentImage')}
+          />
         </div>
-      ) : null}
+      )}
 
       <label className="flex items-center justify-end gap-2 text-sm font-semibold text-[var(--ads-text)]">
         <input

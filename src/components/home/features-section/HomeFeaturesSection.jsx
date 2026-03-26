@@ -8,7 +8,7 @@ const MotionText = motion.p
 
 function HomeFeaturesSection() {
   return (
-    <section id="why-us" className="mx-auto w-full max-w-[1320px] px-3 pb-20 md:px-6 md:pb-24">
+    <section id="why-us" className="mx-auto w-full max-w-[1320px] px-3 pb-14 md:px-6 md:pb-24">
       <div className="rounded-[30px] border border-[var(--home-card-border)] bg-[var(--home-card-bg)] p-5 shadow-[0_20px_55px_rgba(18,27,48,0.12)] md:p-6">
         <h2 className="text-right text-xl font-black text-[var(--home-hero-title)] md:text-2xl">لماذا منصتنا؟</h2>
         <p className="mt-2 text-right text-[0.92rem] text-[var(--home-text-muted)] md:text-sm">
@@ -51,26 +51,28 @@ function HomeFeaturesSection() {
               </MotionSpan>
 
               <div className="relative z-10">
-                <MotionSpan
-                  whileHover={{ rotate: 12, scale: 1.12, y: -2 }}
-                  transition={{ type: 'spring', stiffness: 320, damping: 16 }}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--home-card-border)] [background:var(--home-feature-icon-bg)] text-2xl"
-                >
-                  {feature.icon}
-                </MotionSpan>
+                <div dir="rtl" className="flex items-center gap-3 text-right">
+                  <MotionSpan
+                    whileHover={{ rotate: 12, scale: 1.12, y: -2 }}
+                    transition={{ type: 'spring', stiffness: 320, damping: 16 }}
+                    className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[var(--home-card-border)] [background:var(--home-feature-icon-bg)] text-2xl"
+                  >
+                    {feature.icon}
+                  </MotionSpan>
 
-                <MotionHeader
-                  whileHover={{ x: -4, color: 'var(--home-hero-title)' }}
-                  transition={{ duration: 0.25 }}
-                  className="mt-3 text-right text-base font-black text-[var(--home-text-primary)]"
-                >
-                  {feature.title}
-                </MotionHeader>
+                  <MotionHeader
+                    whileHover={{ x: -4, color: 'var(--home-hero-title)' }}
+                    transition={{ duration: 0.25 }}
+                    className="flex-1 text-right text-base font-black leading-snug text-[var(--home-text-primary)]"
+                  >
+                    {feature.title}
+                  </MotionHeader>
+                </div>
 
                 <MotionText
                   whileHover={{ x: -3 }}
                   transition={{ duration: 0.28 }}
-                  className="mt-2 text-right text-sm leading-relaxed text-[var(--home-text-muted)] md:text-base"
+                  className="mt-3 text-right text-sm leading-relaxed text-[var(--home-text-muted)] md:text-base"
                 >
                   {feature.description}
                 </MotionText>

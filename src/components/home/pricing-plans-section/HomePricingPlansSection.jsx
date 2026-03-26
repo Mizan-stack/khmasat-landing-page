@@ -39,9 +39,9 @@ function HomePricingPlansSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
       transition={{ duration: 0.55 }}
-      className="w-full pb-20 md:pb-24"
+      className="w-full pb-14 md:pb-24"
     >
-      <div className="relative overflow-hidden border-y border-[var(--home-pricing-border)] [background:var(--home-pricing-bg)] px-4 py-9 md:px-7 md:py-11">
+      <div className="relative overflow-hidden border-y border-[var(--home-pricing-border)] [background:var(--home-pricing-bg)] px-4 py-7 md:px-7 md:py-11">
         <motion.span
           aria-hidden
           animate={{ x: [0, 34, 0], y: [0, -26, 0], opacity: [0.18, 0.42, 0.18] }}

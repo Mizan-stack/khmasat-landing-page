@@ -15,7 +15,7 @@ function HomeStoryTabsSection() {
   const activeItem = useMemo(() => TAB_ITEMS.find((item) => item.key === activeKey) ?? TAB_ITEMS[0], [activeKey])
 
   return (
-    <section id="about" className="w-full pb-20 md:pb-24">
+    <section id="about" className="w-full pb-14 md:pb-24">
       <div className="relative w-full overflow-hidden rounded-none border-y border-[var(--home-story-border)] [background:var(--home-story-bg)] p-5 md:border md:p-6">
         <MotionSpan
           aria-hidden
@@ -89,7 +89,7 @@ function HomeStoryTabsSection() {
                       transition: { staggerChildren: 0.08, delayChildren: 0.1 },
                     },
                   }}
-                  className="mt-5 grid gap-3 text-right sm:grid-cols-2"
+                  className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 text-right"
                 >
                   {activeItem.points.map((point) => (
                     <MotionListItem

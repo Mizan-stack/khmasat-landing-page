@@ -1,52 +1,23 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { SOCIAL_LINKS } from '../top-bar/socialLinks'
+import { useTheme } from '../../../app/providers/useTheme'
+import HomeSocialLinks from '../top-bar/HomeSocialLinks'
 import HomeStoreIllustration from './HomeStoreIllustration'
 
-const MotionAnchor = motion.a
 const MotionDiv = motion.div
 
-function HeroSocialLinks({ desktop = false }) {
-  return (
-    <div
-      dir="ltr"
-      className={
-        desktop
-          ? 'flex flex-col items-center gap-3 rounded-r-[28px] border border-[var(--home-nav-border)] bg-white/85 py-4 pl-4 pr-5 shadow-[0_18px_42px_rgba(19,29,55,0.14)] backdrop-blur'
-          : 'flex w-fit flex-col items-center gap-3 rounded-[28px] border border-[var(--home-nav-border)] bg-white/80 px-3 py-3 shadow-[0_12px_28px_rgba(19,29,55,0.1)] backdrop-blur'
-      }
-    >
-      {SOCIAL_LINKS.map((item, index) => (
-        <MotionAnchor
-          key={item.label}
-          href={item.href}
-          target="_blank"
-          rel="noreferrer"
-          initial={{ opacity: 0, x: -12 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.34, delay: 0.06 * index }}
-          whileHover={{ y: -4, scale: 1.06 }}
-          whileTap={{ scale: 0.92 }}
-          className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--home-nav-border)] bg-[var(--home-surface-soft)] text-[var(--home-accent)] shadow-[0_10px_22px_rgba(33,143,185,0.12)] transition-all"
-          aria-label={item.label}
-        >
-          <item.icon className="text-base transition-transform duration-300 group-hover:scale-110" />
-        </MotionAnchor>
-      ))}
-    </div>
-  )
-}
-
 function HomeHeroSection() {
+  const { isDark } = useTheme()
+
   return (
-    <section className="relative w-full overflow-x-clip pb-14 pt-8 md:pb-20 md:pt-10">
+    <section className="relative w-full overflow-x-clip pb-10 pt-8 md:pb-20 md:pt-10">
       <div className="absolute left-0 top-1/2 z-20 hidden -translate-y-1/2 xl:block">
-        <HeroSocialLinks desktop />
+        <HomeSocialLinks desktop isDark={isDark} />
       </div>
 
       <div className="mx-auto w-full max-w-[1320px] px-3 md:px-6">
         <div className="grid items-center gap-7 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="order-2 lg:order-1">
+          <div className="order-1">
             <HomeStoreIllustration />
           </div>
 
@@ -54,10 +25,10 @@ function HomeHeroSection() {
             initial={{ opacity: 0, x: 55 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, delay: 0.08 }}
-            className="order-1 text-right lg:order-2"
+            className="order-2 text-right lg:order-2"
           >
-            <div className="mb-4 flex justify-start xl:hidden">
-              <HeroSocialLinks />
+            <div className="mb-4 hidden justify-start md:flex xl:hidden">
+              <HomeSocialLinks isDark={isDark} />
             </div>
 
             <h1 className="text-[clamp(1.55rem,3.8vw,3.25rem)] font-black leading-tight text-[var(--home-hero-title)]">
@@ -69,7 +40,7 @@ function HomeHeroSection() {
               نحن متخصصون في بناء متاجر احترافية، وإنشاء تجارب رقمية تفاعلية للعلامات التجارية. ابدأ رحلتك الرقمية اليوم.
             </p>
 
-            <div className="mt-6">
+            <div className="mt-6 flex justify-center md:justify-start">
               <Link
                 to="/signup"
                 state={{ direction: 1 }}

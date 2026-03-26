@@ -4,6 +4,7 @@ import { FaPlus } from 'react-icons/fa6'
 import { AddAdModal } from './add-ad-modal'
 import AdsAdCard from './AdsAdCard'
 import AdsBoardToolbar from './AdsBoardToolbar'
+import AdsUpgradeModal from './AdsUpgradeModal'
 import { ADS_ITEMS, ADS_PAGE_TEXT } from './adsBoardData'
 
 const MotionSection = motion.section
@@ -24,6 +25,7 @@ function AdsBoardSection() {
   const [sortBy, setSortBy] = useState('latest')
   const [viewMode, setViewMode] = useState('grid')
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
+  const [upgradeItem, setUpgradeItem] = useState(null)
 
   const ads = useMemo(() => sortItems(ADS_ITEMS, sortBy), [sortBy])
 
@@ -69,15 +71,27 @@ function AdsBoardSection() {
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
           transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
-          className={`mt-6 grid gap-4 ${viewMode === 'grid' ? 'md:grid-cols-2 xl:grid-cols-4' : 'grid-cols-1'}`}
+          className={`mt-6 grid gap-4 ${viewMode === 'grid' ? 'md:grid-cols-2 xl:grid-cols-4' : 'lg:grid-cols-2'}`}
         >
           {ads.map((item, index) => (
-            <AdsAdCard key={`${viewMode}-${item.id}`} item={item} index={index} viewMode={viewMode} />
+            <AdsAdCard
+              key={`${viewMode}-${item.id}`}
+              item={item}
+              index={index}
+              viewMode={viewMode}
+              onUpgrade={setUpgradeItem}
+            />
           ))}
         </MotionDiv>
       </AnimatePresence>
 
       <AddAdModal isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
+      <AdsUpgradeModal
+        key={upgradeItem?.id ?? 'upgrade-modal'}
+        isOpen={Boolean(upgradeItem)}
+        item={upgradeItem}
+        onClose={() => setUpgradeItem(null)}
+      />
     </MotionSection>
   )
 }

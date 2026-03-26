@@ -3,7 +3,55 @@ import { FaArrowLeft } from 'react-icons/fa'
 
 const MotionButton = motion.button
 
-function FeatureSideList({ features, activeKey, onChange, listRef, buttonRefs }) {
+function FeatureSideList({ features, activeKey, onChange, listRef, buttonRefs, mobile = false }) {
+  if (mobile) {
+    return (
+      <div dir="rtl" className="overflow-x-auto pb-1 [scrollbar-width:none]">
+        <div className="flex w-max gap-3 pe-1">
+          {features.map((item) => {
+            const isActive = item.key === activeKey
+            const Icon = item.icon
+
+            return (
+              <MotionButton
+                key={item.key}
+                type="button"
+                onClick={() => onChange(item.key)}
+                whileTap={{ scale: 0.96 }}
+                className={`relative flex min-w-[172px] shrink-0 items-center gap-3 overflow-hidden rounded-2xl border px-4 py-3 text-right transition-colors ${
+                  isActive
+                    ? 'border-transparent text-[#07242b]'
+                    : 'border-[var(--home-power-list-border)] bg-[var(--home-power-list-bg)] text-[var(--home-power-list-text)]'
+                }`}
+                style={
+                  isActive
+                    ? {
+                        background: item.activeGradient,
+                        boxShadow: `0 14px 28px ${item.glow}`,
+                      }
+                    : undefined
+                }
+              >
+                <span
+                  className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border text-base transition-all duration-300"
+                  style={{
+                    color: isActive ? '#04252c' : item.accent,
+                    backgroundColor: isActive ? `${item.accent}66` : item.accentSoft,
+                    borderColor: isActive ? `${item.accent}8f` : `${item.accent}4f`,
+                  }}
+                >
+                  <Icon />
+                </span>
+
+                <span className="text-sm font-black leading-snug">{item.label}</span>
+              </MotionButton>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div ref={listRef} dir="rtl" className="space-y-3">
       {features.map((item) => {
@@ -14,6 +62,8 @@ function FeatureSideList({ features, activeKey, onChange, listRef, buttonRefs })
           <MotionButton
             key={item.key}
             ref={(node) => {
+              if (!buttonRefs?.current) return
+
               if (node) {
                 buttonRefs.current.set(item.key, node)
                 return
