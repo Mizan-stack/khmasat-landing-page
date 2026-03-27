@@ -14,7 +14,8 @@ const IMPACT_CARDS = {
       size: 'small',
       delay: 0.02,
       floatDelay: 0.1,
-      counterDuration: 1.45,
+      counterDuration: 2.35,
+      counterDelay: 0,
     },
     {
       id: 'merchants',
@@ -28,7 +29,8 @@ const IMPACT_CARDS = {
       size: 'large',
       delay: 0.18,
       floatDelay: 0.32,
-      counterDuration: 1.55,
+      counterDuration: 2.6,
+      counterDelay: 0.12,
     },
   ],
   right: [
@@ -44,7 +46,8 @@ const IMPACT_CARDS = {
       size: 'large',
       delay: 0.1,
       floatDelay: 0.24,
-      counterDuration: 1.7,
+      counterDuration: 2.85,
+      counterDelay: 0.06,
     },
     {
       id: 'satisfaction',
@@ -58,7 +61,8 @@ const IMPACT_CARDS = {
       size: 'small',
       delay: 0.26,
       floatDelay: 0.42,
-      counterDuration: 1.6,
+      counterDuration: 2.45,
+      counterDelay: 0.18,
     },
   ],
 }

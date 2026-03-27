@@ -1,26 +1,49 @@
 import { IMPACT_CARDS } from './impactCardsData'
-import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const MotionSection = motion.section
 const MotionArticle = motion.article
 
-function AnimatedCounter({ value, decimals = 0, duration = 1.5 }) {
+function AnimatedCounter({ value, decimals = 0, duration = 2.4, start = false, delay = 0 }) {
   const [displayValue, setDisplayValue] = useState(0)
+  const shouldReduceMotion = useReducedMotion()
 
   useEffect(() => {
+    if (!start) {
+      return undefined
+    }
+
     let frameId = 0
-    let startTime = 0
     const targetValue = Number(value)
 
+    if (shouldReduceMotion) {
+      frameId = window.requestAnimationFrame(() => {
+        setDisplayValue(targetValue)
+      })
+
+      return () => {
+        window.cancelAnimationFrame(frameId)
+      }
+    }
+
+    let animationStart = 0
+
     function step(timestamp) {
-      if (!startTime) {
-        startTime = timestamp
+      if (!animationStart) {
+        animationStart = timestamp
       }
 
-      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1)
-      const easedProgress = 1 - (1 - progress) ** 3
+      const elapsed = timestamp - animationStart
+
+      if (elapsed < delay * 1000) {
+        frameId = window.requestAnimationFrame(step)
+        return
+      }
+
+      const progress = Math.min((elapsed - delay * 1000) / (duration * 1000), 1)
+      const easedProgress = 1 - (1 - progress) ** 4
       const nextValue = targetValue * easedProgress
 
       setDisplayValue(nextValue)
@@ -35,7 +58,7 @@ function AnimatedCounter({ value, decimals = 0, duration = 1.5 }) {
     return () => {
       window.cancelAnimationFrame(frameId)
     }
-  }, [duration, value])
+  }, [delay, duration, shouldReduceMotion, start, value])
 
   return (
     <>
@@ -47,7 +70,7 @@ function AnimatedCounter({ value, decimals = 0, duration = 1.5 }) {
   )
 }
 
-function ImpactCard({ card, index }) {
+function ImpactCard({ card, shimmerIndex, startCounter }) {
   const Icon = card.icon
   const isLarge = card.size === 'large'
 
@@ -77,7 +100,7 @@ function ImpactCard({ card, index }) {
       <motion.span
         aria-hidden
         animate={{ x: ['-135%', '135%'] }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: 'linear', delay: index * 0.2 }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: 'linear', delay: shimmerIndex * 0.2 }}
         className="pointer-events-none absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-cyan-300/18 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
       />
 
@@ -103,21 +126,43 @@ function ImpactCard({ card, index }) {
 
       <div className="mt-auto pt-3 md:pt-5">
         <div className="mb-3 h-px w-full bg-[linear-gradient(90deg,rgba(57,188,188,0),rgba(57,188,188,0.24),rgba(57,188,188,0))] md:mb-4" />
-        <div className="flex items-end justify-end gap-1">
-        <motion.span
-          animate={{ scale: [1, 1.07, 1], opacity: [0.8, 1, 0.8] }}
-          transition={{ duration: 1.7, repeat: Infinity, ease: 'easeInOut', delay: card.floatDelay }}
-          className="text-[clamp(2.2rem,3.2vw,3.9rem)] font-black leading-none text-[var(--home-impact-number)]"
-        >
-          {card.suffix}
-        </motion.span>
-        <motion.span
-          animate={{ y: [0, -3, 0] }}
-          transition={{ duration: 1.7, repeat: Infinity, ease: 'easeInOut', delay: card.floatDelay }}
-          className="text-[clamp(2.2rem,3.2vw,3.9rem)] font-black leading-none tracking-tight text-[var(--home-impact-number)]"
-        >
-          <AnimatedCounter value={card.numericValue} decimals={card.decimals} duration={card.counterDuration} />
-        </motion.span>
+        <div className="flex items-end justify-end gap-1 tabular-nums">
+          <motion.span
+            animate={
+              startCounter
+                ? { y: [0, -2, 0], opacity: [0.84, 1, 0.84] }
+                : { y: 0, opacity: 0.7 }
+            }
+            transition={
+              startCounter
+                ? { duration: 2.8, repeat: Infinity, ease: 'easeInOut', delay: card.floatDelay + 0.1 }
+                : { duration: 0.28 }
+            }
+            className="text-[clamp(2.2rem,3.2vw,3.9rem)] font-black leading-none text-[var(--home-impact-number)] drop-shadow-[0_10px_20px_rgba(43,184,179,0.16)]"
+          >
+            {card.suffix}
+          </motion.span>
+          <motion.span
+            animate={
+              startCounter
+                ? { y: [0, -2.5, 0], scale: [1, 1.018, 1], opacity: [0.92, 1, 0.92] }
+                : { y: 0, scale: 0.985, opacity: 0.76 }
+            }
+            transition={
+              startCounter
+                ? { duration: 2.8, repeat: Infinity, ease: 'easeInOut', delay: card.floatDelay + 0.18 }
+                : { duration: 0.3 }
+            }
+            className="text-[clamp(2.2rem,3.2vw,3.9rem)] font-black leading-none tracking-tight text-[var(--home-impact-number)] drop-shadow-[0_12px_22px_rgba(43,184,179,0.18)]"
+          >
+            <AnimatedCounter
+              value={card.numericValue}
+              decimals={card.decimals}
+              duration={card.counterDuration}
+              start={startCounter}
+              delay={card.counterDelay}
+            />
+          </motion.span>
         </div>
       </div>
     </MotionArticle>
@@ -125,8 +170,16 @@ function ImpactCard({ card, index }) {
 }
 
 function HomeImpactStatsSection() {
+  const sectionRef = useRef(null)
+  const startCounters = useInView(sectionRef, {
+    once: true,
+    amount: 0.18,
+    margin: '0px 0px 140px 0px',
+  })
+
   return (
     <MotionSection
+      ref={sectionRef}
       id="impact"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -140,12 +193,12 @@ function HomeImpactStatsSection() {
             <div className="grid gap-3.5 sm:grid-cols-2 md:gap-4">
               <div className="space-y-3.5 md:space-y-4">
                 {IMPACT_CARDS.left.map((card, index) => (
-                  <ImpactCard key={card.id} card={card} index={index} />
+                  <ImpactCard key={card.id} card={card} shimmerIndex={index} startCounter={startCounters} />
                 ))}
               </div>
               <div className="space-y-3.5 md:space-y-4">
                 {IMPACT_CARDS.right.map((card, index) => (
-                  <ImpactCard key={card.id} card={card} index={index + 2} />
+                  <ImpactCard key={card.id} card={card} shimmerIndex={index + 2} startCounter={startCounters} />
                 ))}
               </div>
             </div>
